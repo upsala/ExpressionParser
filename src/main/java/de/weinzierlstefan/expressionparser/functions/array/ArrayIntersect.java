@@ -1,0 +1,37 @@
+package de.weinzierlstefan.expressionparser.functions.array;
+
+import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExpressionException;
+import de.weinzierlstefan.expressionparser.Function;
+import de.weinzierlstefan.expressionparser.value.Value;
+import de.weinzierlstefan.expressionparser.value.ValueList;
+
+public class ArrayIntersect implements Function {
+  @Override
+  public String getName() {
+    return "arrayintersect";
+  }
+
+  @Override
+  public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
+    ValueList list1 = valueList.get(0).toArray();
+    ValueList list2 = valueList.get(1).toArray();
+    if (list1==null || list2==null) {
+      throw new ExpressionException("Parameters must be a arrays");
+    }
+
+    ValueList resultList = new ValueList();
+    for(Value value : list1) {
+      if (list2.contains(value)) {
+        resultList.add(value);
+      }
+    }
+
+    return Value.of(resultList);
+  }
+
+  @Override
+  public boolean parameterCount(int count) {
+    return count==2;
+  }
+}

@@ -1,0 +1,370 @@
+options
+{
+    //LOOKAHEAD=6;
+    //FORCE_LA_CHECK = true;
+    STATIC=false;
+    //DEBUG_LOOKAHEAD = true;
+    //DEBUG_TOKEN_MANAGER = true;
+    //DEBUG_PARSER = true;
+}
+PARSER_BEGIN(Parser)
+
+package de.weinzierlstefan.expressionparser.parser;
+
+import java.util.*;
+
+public class Parser
+{
+  public void dummy() {}
+}
+
+PARSER_END(Parser)
+
+SKIP:
+{
+		" "
+	|	"\n"
+	|	"\r"
+	|	"\t"
+}
+
+TOKEN [IGNORE_CASE]:
+{
+	<WITH: "WITH">
+|	<AND: "AND">
+| <OR: "OR">
+| <XOR: "XOR">
+| <NOT: "NOT">
+| <AS: "AS">
+}
+
+TOKEN : {
+   <INTEGER_LITERAL: ["0"-"9"] (["0"-"9"])*>
+|  <HEX_LITERAL: "0" ["x","X"] (<HEX_DIGIT>)+>
+|  <#HEX_DIGIT: ["0"-"9","a"-"f","A"-"F"]>
+|  <REAL_LITERAL: (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)? >
+|  <#EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+>
+|  <SIMPLE_STRING_LITERAL: "\'" (~["\'"])* "\'" >
+|  <DOUBLE_STRING_LITERAL: "\"" (~["\""])* "\"" >
+|  <#ESCAPED_CHAR: "\\" (["n","t","b","r","f","\\","\'","\""]) >
+|  <BINARY_LITERAL: "0" ["b","B"] (["0","1"])* >
+|  <SIMPLE_ID: ( <LETTER> | "_" ) (<LETTER> | <DIGIT> | "_")*>
+|  <#LETTER: ["A"-"Z", "a"-"z"]>
+|  <#DIGIT: ["0"-"9"]>
+|  <#NOT_RBRACE:  (~ ["}"])+ >
+|  <COMPLEX_ID: <LBRACE> <NOT_RBRACE> <RBRACE> >
+}
+
+TOKEN :
+{
+  < LPAREN: "(" >
+| < RPAREN: ")" >
+| < LBRACE: "{" >
+| < RBRACE: "}" >
+| < LBRACKET: "[" >
+| < RBRACKET: "]" >
+| < SEMICOLON: ";" >
+| < COLON: ":" >
+| < COMMA: "," >
+| < DOT: "."  >
+}
+
+TOKEN :
+{
+  < CMP_GT: ">" >
+| < CMP_LT: "<" >
+| < CMP_LE: "<=" >
+| < CMP_GE: ">=" >
+| < QMARK: "?" >
+| < CMP_NE: "<>" >
+| < CMP_EQ: "=" >
+| < PLUS: "+" >
+| < MINUS: "-" >
+| < BOOL_OR: "||" >
+| < BOOL_AND: "&&" >
+| < BOOL_XOR: "^^" >
+| < BIT_OR: "|" >
+| < BIT_AND: "&" >
+| < BIT_XOR: "^" >
+| < BIT_NOT: "~" >
+| < SHIFT_LEFT: "<<" >
+| < SHIFT_RIGHT: ">>" >
+| < EXCLMATION_MARK: "!" >
+| < ARRAY_KEY: "=>" >
+}
+
+
+
+Operation parse():
+{
+	Operation a;
+}
+{
+		a = expression() <EOF>	{ return a; }
+	|	<EOF> 						{ return null; }
+}
+
+Operation expression():
+{
+	Operation a;
+}
+{
+	a=conditionalExpression()
+	{ return a; }
+}
+
+Operation conditionalExpression():
+{
+	Operation a;
+	Operation b;
+	Operation c;
+}
+{
+	a=bitopExpression()
+
+	(
+		<QMARK> b=expression() <COLON> c=expression() { a=new Operation(Operation.TERNARY, a, b, c); }
+	)?
+	{ return a; }
+}
+
+Operation bitopExpression():
+{
+	Operation a = null;
+	Operation b;
+}
+{
+	a=compareExpression()
+
+	(
+		<BIT_AND> b=bitopExpression()	{ a=new Operation(Operation.BIT_AND, a, b); }
+	|	<BIT_OR> b=bitopExpression()	{ a=new Operation(Operation.BIT_OR, a, b); }
+	|	<BIT_XOR> b=bitopExpression()	{ a=new Operation(Operation.BIT_XOR, a, b); }
+	)?
+	{ return a; }
+}
+
+Operation compareExpression():
+{
+	Operation a = null;
+	Operation b;
+}
+{
+	a=boolExpression()
+
+	(
+			<CMP_EQ> b=compareExpression()		{ a=new Operation(Operation.CMP_EQ, a, b); }
+		|	<CMP_NE> b=compareExpression()	{ a=new Operation(Operation.CMP_NE, a, b); }
+		|	<CMP_LT> b=compareExpression()		{ a=new Operation(Operation.CMP_LT, a, b); }
+		|	<CMP_LE> b=compareExpression()	{ a=new Operation(Operation.CMP_LE, a, b); }
+		|	<CMP_GT> b=compareExpression()		{ a=new Operation(Operation.CMP_GT, a, b); }
+		|	<CMP_GE> b=compareExpression()	{ a=new Operation(Operation.CMP_GE, a, b); }
+	)?
+	{ return a; }
+}
+
+Operation boolExpression():
+{
+	Operation a = null;
+	Operation b;
+}
+{
+	a=shiftExpression()
+	(
+			( <BOOL_AND> | <AND> ) b=boolExpression()	{ a=new Operation(Operation.BOOL_AND, a, b); }
+		|	( <BOOL_OR> | <OR> ) b=boolExpression()		{ a=new Operation(Operation.BOOL_OR, a, b); }
+		|	( <BOOL_XOR> | <XOR> ) b=boolExpression()	{ a=new Operation(Operation.BOOL_XOR, a, b); }
+	)?
+	{ return a; }
+}
+
+
+Operation shiftExpression():
+{
+	Operation a = null;
+	Operation b;
+}
+{
+	a=additiveExpression()
+	(
+			<SHIFT_LEFT> b=shiftExpression() 	{ a = new Operation(Operation.SHIFT_LEFT, a, b); }
+		|	<SHIFT_RIGHT> b=shiftExpression() 	{ a = new Operation(Operation.SHIFT_RIGHT, a, b); }
+	)?
+	{ return a; }
+}
+
+Operation additiveExpression():
+{
+	Operation a;
+	Operation b;
+}
+{
+	a=multiplicativeExpression()
+	(
+			"+" b=multiplicativeExpression()	{ a = new Operation(Operation.ADD, a, b); }
+		|	"-" b=multiplicativeExpression()	{ a = new Operation(Operation.SUB, a, b); }
+	)*
+	{ return a; }
+}
+
+Operation multiplicativeExpression():
+{
+	Operation a;
+	Operation b;
+}
+{
+	a=unaryExpression1()
+	(
+			"*" b=unaryExpression1()    { a = new Operation(Operation.MUL, a, b); }
+		|	"/" b=unaryExpression1()    { a = new Operation(Operation.DIV, a, b); }
+		| "%" b=unaryExpression1()		{ a = new Operation(Operation.MOD, a, b); }
+	)*
+	{ return a; }
+}
+
+Operation unaryExpression1():
+{
+    Operation a;
+}
+{
+		"-" a=unaryExpression1()     { return new Operation(Operation.NEGATE, a); }
+	|	"+" a=unaryExpression1()     { return a; }
+	|	a=unaryExpression2()         { return a; }
+}
+
+Operation unaryExpression2():
+{
+	Operation a;
+}
+{
+		<BIT_NOT> a=unaryExpression2() 					{ return new Operation(Operation.BIT_NOT, a); }
+	|	( <NOT> | <EXCLMATION_MARK> ) a=unaryExpression2()  { return new Operation(Operation.BOOL_NOT, a); }
+	| a=element() 														{ return a; }
+}
+
+Operation complexElement():
+{
+	Operation a;
+	Token t;
+}
+{
+		LOOKAHEAD(3) a=with()									{ return a; }
+	| LOOKAHEAD(3) a=function()							{ return a; }
+	| LOOKAHEAD(2) t=<SIMPLE_ID> <LPAREN> <RPAREN>	{ return new Operation(Operation.FUNCTION_CALL, t.toString()); }
+	| t=<SIMPLE_ID> 						{ return new Operation(Operation.VARIABLE, t.toString()); }
+	| t=<COMPLEX_ID> 						{ return new Operation(Operation.VARIABLE_ESC, t.toString()); }
+	|	<LPAREN> a=expression() <RPAREN>		{ return a; }
+	| a=arrayExpression()				{ return a; }
+}
+
+Operation complexElement2():
+{
+  Operation a;
+  List<Operation> operationList;
+}
+{
+		LOOKAHEAD(2) a=complexElement() operationList=suffixExpressionList() { operationList.add(0, a); return new Operation(Operation.SUFFIXED, operationList); }
+	| a=complexElement()	{ return a; }
+}
+
+List<Operation> suffixExpressionList():
+{
+ 	List<Operation> operationList = new ArrayList<Operation>();
+	Operation a;
+}
+{
+	(
+		a = suffixExpression()	{ operationList.add(a); }
+	)+	{ return operationList; }
+}
+
+Operation suffixExpression():
+{
+	Operation a;
+	Token t;
+}
+{
+		a=arrayExpression()	{ return a; }
+	| LOOKAHEAD(2) <DOT> t=<SIMPLE_ID>	{ a = new Operation(Operation.SIMPLE_NAME_SUFFIX, t.toString()); }
+	| <DOT> t=<COMPLEX_ID> { a= new Operation(Operation.COMPLEX_NAME_SUFFIX, t.toString()); }
+
+}
+
+Operation arrayExpression():
+{
+	List<Operation> operationList = new ArrayList<Operation>();
+	Operation a;
+}
+{
+	<LBRACKET>
+			a=arrayEntry()					{ operationList.add(a); }
+		(	<COMMA> a=arrayEntry()	{ operationList.add(a); } )*
+	<RBRACKET>
+	{ return new Operation(Operation.ARRAY_LIST, operationList); }
+}
+
+Operation arrayEntry():
+{
+	Operation a;
+	Operation b=null;
+}
+{
+	a=expression()
+	[ <ARRAY_KEY> b=expression() ]
+	{ return new Operation(Operation.ARRAY_ENTRY, a, b); }
+}
+
+Operation element():
+{
+    Token t;
+    Operation a;
+}
+{
+    t=<INTEGER_LITERAL>				{ return new Operation(Operation.INTEGER_LITERAL, t.toString()); }
+  | t=<REAL_LITERAL>					{ return new Operation(Operation.REAL_LITERAL, t.toString()); }
+	|	t=<HEX_LITERAL>						{ return new Operation(Operation.HEX_LITERAL, t.toString()); }
+	| t=<BINARY_LITERAL>				{ return new Operation(Operation.BINARY_LITERAL, t.toString()); }
+	| t=<SIMPLE_STRING_LITERAL>	{ return new Operation(Operation.SIMPLE_STRING_LITERAL, t.toString()); }
+	| t=<DOUBLE_STRING_LITERAL>	{ return new Operation(Operation.DOUBLE_STRING_LITERAL, t.toString()); }
+	| a=complexElement() 			{ return a; }
+}
+
+Operation function():
+{
+	List<Operation> operationList = new ArrayList<Operation>();
+	Operation a;
+	Token t;
+}
+{
+  t = <SIMPLE_ID>
+	<LPAREN>
+			a=expression()					{ operationList.add(a); }
+		(	<COMMA> a=expression()	{ operationList.add(a); } )*
+	<RPAREN>
+	{ return new Operation(Operation.FUNCTION_CALL, t.toString(), operationList); }
+}
+
+Operation with():
+{
+ 	List<Operation> operationList = new ArrayList<Operation>();
+ 	Operation a;
+ 	Token t;
+}
+{
+	<WITH>
+	<LPAREN>
+	(
+		LOOKAHEAD(6)
+		a=expression()
+		<AS>
+		t=<SIMPLE_ID>
+		<COMMA>
+		{ operationList.add(new Operation(Operation.AS, t.toString(), a)); }
+	)*
+	a=expression()
+	<RPAREN>
+	{
+		operationList.add(a);
+		return new Operation(Operation.WITH, operationList);
+	}
+}

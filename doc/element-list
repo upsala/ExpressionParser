@@ -1,0 +1,10 @@
+de.weinzierlstefan.expressionparser
+de.weinzierlstefan.expressionparser.functions.array
+de.weinzierlstefan.expressionparser.functions.common
+de.weinzierlstefan.expressionparser.functions.crypto
+de.weinzierlstefan.expressionparser.functions.datetime
+de.weinzierlstefan.expressionparser.functions.math
+de.weinzierlstefan.expressionparser.functions.statistics
+de.weinzierlstefan.expressionparser.functions.string
+de.weinzierlstefan.expressionparser.parser
+de.weinzierlstefan.expressionparser.value

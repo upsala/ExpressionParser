@@ -137,10 +137,10 @@ public class TestParser {
 
   @Test
   public void testWith() throws ExpressionException {
-    //assertEquals("1", new ExpressionParser().parse("WITH(1 AS a, a)").eval().toString());
+    assertEquals("1", new ExpressionParser().parse("WITH(1 AS a, a)").eval().toString());
     assertEquals("2", new ExpressionParser().parse("WITH(1 AS a, a+1)").eval().toString());
-    //assertEquals("3", new ExpressionParser().parse("WITH(1 AS a, 2 AS b, a+b)").eval().toString());
-    //assertEquals("4", new ExpressionParser().parse("WITH(3 AS c, (1+c))").eval().toString());
+    assertEquals("3", new ExpressionParser().parse("WITH(1 AS a, 2 AS b, a+b)").eval().toString());
+    assertEquals("4", new ExpressionParser().parse("WITH(3 AS c, (1+c))").eval().toString());
   }
 
   //@Disabled("Must be reapaired")
@@ -239,9 +239,9 @@ public class TestParser {
 
   @Test
   public void testArray() throws ExpressionException {
-    /*assertEquals("[1,2,3]", new ExpressionParser().parse("[1,2,3]").eval().toString());
-    assertEquals("[a,b,c]", new ExpressionParser().parse("['a','b','c']").eval().toString());*/
-    assertEquals("[[1]]", new ExpressionParser().parse("[[1]]").eval().toString());/*
+    assertEquals("[1,2,3]", new ExpressionParser().parse("[1,2,3]").eval().toString());
+    assertEquals("[a,b,c]", new ExpressionParser().parse("['a','b','c']").eval().toString());
+    assertEquals("[[1]]", new ExpressionParser().parse("[[1]]").eval().toString());
     assertEquals("[[1,2,3]]", new ExpressionParser().parse("[[1,2,3]]").eval().toString());
     assertEquals("[[1,2,3],4]", new ExpressionParser().parse("[[1,2,3],4]").eval().toString());
     assertEquals("[NULL,2,3]", new ExpressionParser().parse("[NULL,2,3]").eval().toString());
@@ -251,7 +251,7 @@ public class TestParser {
     assertEquals("[0=>1,1=>2,2=>3,4=>1,5=>2,6=>3]", new ExpressionParser().parse("[1,2,3,4=>1,5=>2,6=>3]").eval().toString());
     assertEquals("[1=>4]", new ExpressionParser().parse("[1=>2,1=>3,1=>4]").eval().toString());
     assertEquals("[a=>1,b=>2]", new ExpressionParser().parse("['a'=>1,'b'=>2]").eval().toString());
-    assertEquals("[NULL=>NULL,2=>0]", new ExpressionParser().parse("[NULL=>NULL,2=>0]").eval().toString());*/
+    assertEquals("[NULL=>NULL,2=>0]", new ExpressionParser().parse("[NULL=>NULL,2=>0]").eval().toString());
   }
 
 /*  @Test

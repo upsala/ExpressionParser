@@ -17,7 +17,7 @@ public class Format implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
     int token = 1;
 
     StringBuilder stringBuilder = new StringBuilder();
@@ -25,7 +25,7 @@ public class Format implements Function {
       char c = str.charAt(i);
       if (c=='%') {
         if (token<valueList.size()) {
-          stringBuilder.append(valueList.get(token).toString());
+          stringBuilder.append(valueList.getString(token));
         }
         token++;
       } else {

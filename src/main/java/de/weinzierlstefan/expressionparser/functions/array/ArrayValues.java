@@ -14,13 +14,12 @@ public class ArrayValues implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value objectValue = valueList.get(0);
-    if (!objectValue.isArray()) {
+    if (!valueList.isArray(0)) {
       throw new ExpressionException("Value must be a array");
     }
 
     ValueList resultList = new ValueList();
-    resultList.addAll(objectValue.toArray());
+    resultList.addAll(valueList.getArray(0));
 
     return Value.of(resultList);
   }

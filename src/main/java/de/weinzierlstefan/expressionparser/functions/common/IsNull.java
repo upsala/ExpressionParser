@@ -14,12 +14,12 @@ public class IsNull implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    return Value.of(valueList.get(0).isNull());
+    return Value.of(valueList.allIsNull());
   }
 
   @Override
   public boolean parameterCount(int count) {
-    return count==1;
+    return count>0;
   }
 
   @Override

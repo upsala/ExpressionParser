@@ -237,9 +237,9 @@ public class ExpressionParser {
         throw new ExpressionException("Number expected");
       }
 
-      BigDecimal result = valueList.get(0).toBigDecimal();
+      BigDecimal result = valueList.getBigDecimal(0);
       for(int i=1; i<valueList.size(); ++i) {
-        result = result.multiply(valueList.get(i).toBigDecimal(), ctx.getMathContext());
+        result = result.multiply(valueList.getBigDecimal(i), ctx.getMathContext());
       }
       return Value.of(result);
     };
@@ -259,9 +259,9 @@ public class ExpressionParser {
         throw new ExpressionException("Number expected");
       }
 
-      BigDecimal result = valueList.get(0).toBigDecimal();
+      BigDecimal result = valueList.getBigDecimal(0);
       for(int i=1; i<valueList.size(); ++i) {
-        result = result.divide(valueList.get(i).toBigDecimal(), ctx.getMathContext());
+        result = result.divide(valueList.getBigDecimal(i), ctx.getMathContext());
       }
       return Value.of(result);
     };
@@ -281,9 +281,9 @@ public class ExpressionParser {
         throw new ExpressionException("Number expected");
       }
 
-      BigDecimal result = valueList.get(0).toBigDecimal();
+      BigDecimal result = valueList.getBigDecimal(0);
       for(int i=1; i<valueList.size(); ++i) {
-        BigDecimal[] dr = result.divideAndRemainder(valueList.get(i).toBigDecimal(), ctx.getMathContext());
+        BigDecimal[] dr = result.divideAndRemainder(valueList.getBigDecimal(i), ctx.getMathContext());
         result = dr[1];
       }
       return Value.of(result);
@@ -361,9 +361,9 @@ public class ExpressionParser {
         throw new ExpressionException("Number expected");
       }
 
-      BigDecimal result = valueList.get(0).toBigDecimal();
+      BigDecimal result = valueList.getBigDecimal(0);
       for(int i=1; i<valueList.size(); ++i) {
-        result = result.subtract(valueList.get(i).toBigDecimal(), ctx.getMathContext());
+        result = result.subtract(valueList.getBigDecimal(i), ctx.getMathContext());
       }
       return Value.of(result);
     };
@@ -427,11 +427,8 @@ public class ExpressionParser {
         throw new ExpressionException("Values must be numbers");
       }
 
-      Value a = valueList.get(0);
-      Value b = valueList.get(1);
-
-      BigInteger bi = a.toBigDecimal().toBigInteger();
-      long shift = b.toLong();
+      BigInteger bi = valueList.getBigDecimal(0).toBigInteger();
+      long shift = valueList.getLong(1);
 
       bi = bi.shiftLeft((int)shift);
 
@@ -455,11 +452,8 @@ public class ExpressionParser {
         throw new ExpressionException("Values must be numbers");
       }
 
-      Value a = valueList.get(0);
-      Value b = valueList.get(1);
-
-      BigInteger bi = a.toBigDecimal().toBigInteger();
-      long shift = b.toLong();
+      BigInteger bi = valueList.getBigDecimal(0).toBigInteger();
+      long shift = valueList.getLong(1);
 
       bi = bi.shiftRight((int)shift);
 

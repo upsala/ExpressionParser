@@ -17,23 +17,22 @@ public class AddDay implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value valueTemporal = valueList.get(0);
-    if (!valueTemporal.isTemporal()) {
+    Temporal t = valueList.getTemporal(0);
+    if (t==null) {
       throw new ExpressionException("Value must be a DateTime");
     }
 
-    Value valueOffset = valueList.get(1);
-    if (!valueOffset.isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Offset must be a number");
     }
-
-    Temporal t = valueTemporal.toTemporal();
 
     if (!t.isSupported(ChronoUnit.DAYS)) {
       throw new ExpressionException("Day is not supported");
     }
 
-    t = t.plus(valueOffset.toLong(), ChronoUnit.DAYS);
+    long offset = valueList.getLong(1);
+
+    t = t.plus(offset, ChronoUnit.DAYS);
 
     return Value.of(t);
   }

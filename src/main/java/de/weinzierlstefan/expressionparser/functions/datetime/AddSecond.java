@@ -17,22 +17,22 @@ public class AddSecond implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value valueDateTime = valueList.get(0);
-    if (!valueDateTime.isTemporal()) {
+    Temporal t = valueList.getTemporal(0);
+    if (t==null) {
       throw new ExpressionException("Value must be a DateTime");
     }
 
-    Value valueOffset = valueList.get(1);
-    if (!valueOffset.isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Offset must be a number");
     }
 
-    Temporal t = valueDateTime.toTemporal();
     if (!t.isSupported(ChronoUnit.SECONDS)) {
       throw new ExpressionException("Day is not supported");
     }
 
-    t = t.plus(valueOffset.toLong(), ChronoUnit.SECONDS);
+    long offset = valueList.getLong(1);
+
+    t = t.plus(offset, ChronoUnit.SECONDS);
 
     return Value.of(t);
   }

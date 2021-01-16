@@ -14,17 +14,17 @@ public class ArraySlice implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    ValueList list = valueList.get(0).toArray();
+    ValueList list = valueList.getArray(0);
     if (list==null) {
       throw new ExpressionException("First parameter must be a array");
     }
 
-    if (!valueList.get(1).isNumber() || !valueList.get(2).isNumber()) {
+    if (!valueList.isNumber(1) || !valueList.isNumber(2)) {
       throw new ExpressionException("Second and third parameter must be numbers");
     }
 
-    int first = (int)valueList.get(1).toLong();
-    int second = (int)valueList.get(2).toLong();
+    int first = (int)valueList.getLong(1);
+    int second = (int)valueList.getLong(2);
 
     if (first<0 || first>=list.size() || second<0 || second>=list.size() || first>second) {
       throw new ExpressionException("Positions are out of range");

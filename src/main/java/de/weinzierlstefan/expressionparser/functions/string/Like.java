@@ -14,8 +14,8 @@ public class Like implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    String pattern = valueList.get(1).toString();
+    String str = valueList.getString(0);
+    String pattern = valueList.getString(1);
 
     Pattern p = getPattern(pattern);
 

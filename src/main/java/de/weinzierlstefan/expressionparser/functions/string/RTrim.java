@@ -14,11 +14,11 @@ public class RTrim implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
 
     String mask = " \r\n\t";
     if (valueList.size()>1) {
-      mask = valueList.get(1).toString();
+      mask = valueList.getString(1);
     }
 
     int pos=str.length()-1;

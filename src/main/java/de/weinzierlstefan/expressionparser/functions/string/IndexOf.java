@@ -14,7 +14,7 @@ public class IndexOf implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    return Value.of(valueList.get(0).toString().indexOf(valueList.get(1).toString()));
+    return Value.of(valueList.getString(0).indexOf(valueList.getString(1)));
   }
 
   @Override

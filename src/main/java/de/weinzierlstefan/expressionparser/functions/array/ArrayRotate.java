@@ -16,16 +16,16 @@ public class ArrayRotate implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    ValueList list = valueList.get(0).toArray();
+    ValueList list = valueList.getArray(0);
     if (list==null) {
       throw new ExpressionException("First parameter must be a array");
     }
 
-    if (!valueList.get(1).isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Second parameter must be a number");
     }
 
-    int distance = (int)valueList.get(1).toLong();
+    int distance = (int)valueList.getLong(1);
 
     ValueList resultList = new ValueList(list);
 

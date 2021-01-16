@@ -14,13 +14,13 @@ public class CharAt implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    if (!valueList.get(1).isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Position must be a number");
     }
 
-    int pos = (int)valueList.get(1).toLong();
+    int pos = (int)valueList.getLong(1);
 
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
     if (pos<0 || pos>=str.length()) {
       return Value.of("");
     }

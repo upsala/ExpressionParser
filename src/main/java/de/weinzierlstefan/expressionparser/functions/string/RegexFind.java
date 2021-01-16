@@ -17,8 +17,8 @@ public class RegexFind implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    String regex = valueList.get(1).toString();
+    String str = valueList.getString(0);
+    String regex = valueList.getString(1);
 
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(str);

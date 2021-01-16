@@ -14,13 +14,11 @@ public class SinR implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value inputValue = valueList.get(0);
-
-    if (!inputValue.isNumber()) {
-      throw new ExpressionException("sinr-function can only operate on numbers");
+    if (!valueList.allIsNumber()) {
+      throw new ExpressionException(getName()+"-function can only operate on numbers");
     }
 
-    double value = inputValue.toBigDecimal().doubleValue();
+    double value = valueList.getDouble(0);
 
     return Value.of(Math.sin(value));
   }

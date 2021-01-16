@@ -17,7 +17,7 @@ public class Lower implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
 
     return Value.of(str.toLowerCase());
   }

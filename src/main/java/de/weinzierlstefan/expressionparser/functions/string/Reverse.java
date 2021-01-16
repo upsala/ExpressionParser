@@ -15,7 +15,7 @@ public class Reverse implements Function {
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
     StringBuilder builder = new StringBuilder();
-    builder.append(valueList.get(0).toString());
+    builder.append(valueList.getString(0));
     builder.reverse();
 
     return Value.of(builder.toString());

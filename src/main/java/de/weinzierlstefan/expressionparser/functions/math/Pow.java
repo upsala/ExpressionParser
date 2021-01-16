@@ -15,11 +15,11 @@ public class Pow implements Function {
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
     if (!valueList.allIsNumber()) {
-      throw new ExpressionException("Values must be numbers");
+      throw new ExpressionException(getName()+"-function can only operate on numbers");
     }
 
-    double base = valueList.get(0).toDouble();
-    double exponent = valueList.get(1).toDouble();
+    double base = valueList.getDouble(0);
+    double exponent = valueList.getDouble(1);
 
     return Value.of(Math.pow(base, exponent));
   }

@@ -14,12 +14,12 @@ public class IsNumber implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    return Value.of(valueList.get(0).isNumber());
+    return Value.of(valueList.allIsNumber());
   }
 
   @Override
   public boolean parameterCount(int count) {
-    return count==1;
+    return count>0;
   }
 
   @Override

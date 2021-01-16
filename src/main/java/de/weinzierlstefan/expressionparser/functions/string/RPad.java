@@ -14,17 +14,16 @@ public class RPad implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
 
-    Value lengthValue = valueList.get(1);
-    if (!lengthValue.isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Length must be a number");
     }
-    long length = lengthValue.toLong();
+    long length = valueList.getLong(1);
 
     String padding = " ";
     if (valueList.size()>=3) {
-      padding = valueList.get(2).toString();
+      padding = valueList.getString(2);
     }
 
     int rest = (int)length-str.length();

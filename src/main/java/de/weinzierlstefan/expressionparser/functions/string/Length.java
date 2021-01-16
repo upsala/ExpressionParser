@@ -17,7 +17,7 @@ public class Length implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    return Value.of(valueList.get(0).toString().length());
+    return Value.of(valueList.getString(0).length());
   }
 
   @Override

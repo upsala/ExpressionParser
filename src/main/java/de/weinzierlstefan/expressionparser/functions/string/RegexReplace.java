@@ -14,9 +14,9 @@ public class RegexReplace implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    String regex = valueList.get(1).toString();
-    String newValue = valueList.get(2).toString();
+    String str = valueList.getString(0);
+    String regex = valueList.getString(1);
+    String newValue = valueList.getString(2);
 
     return Value.of(str.replaceAll(regex, newValue));
   }

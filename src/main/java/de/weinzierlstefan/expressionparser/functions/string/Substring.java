@@ -15,18 +15,18 @@ public class Substring implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    if (!valueList.get(1).isNumber()) {
+    String str = valueList.getString(0);
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Start-Position must be a number");
     }
-    int start = (int)valueList.get(1).toLong();
+    int start = (int)valueList.getLong(1);
     int end = Integer.MAX_VALUE;
 
     if (valueList.size()>2) {
-      if (!valueList.get(2).isNumber()) {
+      if (!valueList.isNumber(2)) {
         throw new ExpressionException("End-Position must be a number");
       }
-      end=(int)valueList.get(2).toLong();
+      end=(int)valueList.getLong(2);
     }
 
     if (start<0) {

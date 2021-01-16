@@ -14,7 +14,7 @@ public class IsEmpty implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    return Value.of(valueList.get(0).toString().isEmpty());
+    return Value.of(valueList.getString(0).isEmpty());
   }
 
   @Override

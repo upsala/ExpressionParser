@@ -16,13 +16,13 @@ public class Repeat implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
 
-    if (!valueList.get(1).isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("count must be a number");
     }
 
-    long counter = valueList.get(1).toLong();
+    long counter = valueList.getLong(1);
 
     if (counter>Integer.MAX_VALUE) {
       throw new ExpressionException("count is too big");

@@ -17,13 +17,11 @@ public class Ceil implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value inputValue = valueList.get(0);
-
-    if (!inputValue.isNumber()) {
-      throw new ExpressionException("ceil-function can only operate on numbers");
+    if (!valueList.allIsNumber()) {
+      throw new ExpressionException(getName()+"-function can only operate on numbers");
     }
 
-    BigDecimal value = inputValue.toBigDecimal();
+    BigDecimal value = valueList.getBigDecimal(0);
     value = value.setScale(0, RoundingMode.CEILING);
 
     return Value.of(value.stripTrailingZeros());

@@ -14,18 +14,13 @@ public class ArrayDistinct implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-
-
     ValueList resultList = new ValueList();
 
-    for(Value value : valueList.get(0).toArray()) {
+    for(Value value : valueList.getArray(0)) {
       if (!resultList.contains(value)) {
         resultList.add(value);
       }
     }
-
-
-    //resultList.addAll(valueList.get(0).toArray().stream().distinct().collect(Collectors.toList()));
 
     return Value.of(resultList);
   }

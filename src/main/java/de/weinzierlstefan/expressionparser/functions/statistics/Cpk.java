@@ -16,15 +16,15 @@ public class Cpk implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    if (!valueList.get(0).isNumber() || !valueList.get(1).isNumber()) {
+    if (!valueList.isNumber(0) || !valueList.isNumber(1)) {
       throw new ExpressionException("USG and OSG must be numbers");
     }
-    ValueList list = valueList.get(2).toArray();
+    ValueList list = valueList.getArray(2);
 
     // cpk=min(avg-usg,osg-avg)/(3*std)
 
-    BigDecimal usg = valueList.get(0).toBigDecimal();
-    BigDecimal osg = valueList.get(1).toBigDecimal();
+    BigDecimal usg = valueList.getBigDecimal(0);
+    BigDecimal osg = valueList.getBigDecimal(1);
 
     BigDecimal avg = StatisticTools.avg(list, executorContext);
     BigDecimal std = StatisticTools.std(list, executorContext);

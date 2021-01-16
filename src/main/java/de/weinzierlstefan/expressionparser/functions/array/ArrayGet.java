@@ -14,16 +14,16 @@ public class ArrayGet implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    ValueList list = valueList.get(0).toArray();
+    ValueList list = valueList.getArray(0);
     if (list==null) {
       throw new ExpressionException("First parameter must be a array");
     }
 
-    if (!valueList.get(1).isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Second parameter must be a number");
     }
 
-    int pos = (int)valueList.get(1).toLong();
+    int pos = (int)valueList.getLong(1);
 
     if (pos<0 || pos>=list.size()) {
       throw new ExpressionException("Index out of range");

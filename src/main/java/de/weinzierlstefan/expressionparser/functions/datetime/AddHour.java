@@ -17,23 +17,22 @@ public class AddHour implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value valueDateTime = valueList.get(0);
-    if (!valueDateTime.isTemporal()) {
+    Temporal t = valueList.getTemporal(0);
+    if (t==null) {
       throw new ExpressionException("Value must be a DateTime");
     }
 
-    Value valueOffset = valueList.get(1);
-    if (!valueOffset.isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Offset must be a number");
     }
 
-    Temporal t = valueDateTime.toTemporal();
-    if (!t.isSupported(ChronoUnit.DAYS)) {
+    if (!t.isSupported(ChronoUnit.HOURS)) {
       throw new ExpressionException("Hour is not supported");
     }
 
+    long offset = valueList.getLong(1);
 
-    t = t.plus(valueOffset.toLong(), ChronoUnit.HOURS);
+    t = t.plus(offset, ChronoUnit.HOURS);
 
     return Value.of(t);
   }

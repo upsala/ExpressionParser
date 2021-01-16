@@ -15,18 +15,18 @@ public class Substr implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    if (!valueList.get(1).isNumber()) {
+    String str = valueList.getString(0);
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("Start-Position must be a number");
     }
-    long start = valueList.get(1).toLong();
+    long start = valueList.getLong(1);
     long length = Integer.MAX_VALUE;
 
     if (valueList.size()>2) {
-      if (!valueList.get(2).isNumber()) {
+      if (!valueList.isNumber(2)) {
         throw new ExpressionException("Length must be a number");
       }
-      length=valueList.get(2).toLong();
+      length=valueList.getLong(2);
     }
     if (length<0) {
       throw new ExpressionException("Length must be positiv");

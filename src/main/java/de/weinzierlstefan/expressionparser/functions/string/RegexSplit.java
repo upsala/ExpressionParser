@@ -14,15 +14,15 @@ public class RegexSplit implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    String pattern = valueList.get(1).toString();
+    String str = valueList.getString(0);
+    String pattern = valueList.getString(1);
 
     int limit=-1;
     if (valueList.size()>2) {
-      if (!valueList.get(2).isNumber()) {
+      if (!valueList.isNumber(2)) {
         throw new ExpressionException("Limit must be a number");
       }
-      limit = (int)valueList.get(2).toLong();
+      limit = (int)valueList.getLong(2);
     }
 
     String[] result = str.split(pattern, limit);

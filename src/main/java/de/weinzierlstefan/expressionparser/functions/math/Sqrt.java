@@ -16,11 +16,11 @@ public class Sqrt implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    if (!valueList.get(0).isNumber()) {
-      throw new ExpressionException("Value must be a number");
+    if (!valueList.allIsNumber()) {
+      throw new ExpressionException(getName()+"-function can only operate on numbers");
     }
 
-    BigDecimal value = valueList.get(0).toBigDecimal();
+    BigDecimal value = valueList.getBigDecimal(0);
 
     if (value.signum()==-1) {
       throw new ExpressionException("Value must be not negativ");

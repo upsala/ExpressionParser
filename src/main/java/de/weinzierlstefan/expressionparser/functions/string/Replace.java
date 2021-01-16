@@ -14,9 +14,9 @@ public class Replace implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
-    String search = valueList.get(1).toString();
-    String replace = valueList.get(2).toString();
+    String str = valueList.getString(0);
+    String search = valueList.getString(1);
+    String replace = valueList.getString(2);
 
     return Value.of(str.replace(search, replace));
   }

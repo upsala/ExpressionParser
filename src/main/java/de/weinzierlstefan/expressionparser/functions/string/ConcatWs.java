@@ -19,7 +19,7 @@ public class ConcatWs implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String ws = valueList.get(0).toString();
+    String ws = valueList.getString(0);
 
     StringJoiner joiner = new StringJoiner(ws);
     for(int i=1; i<valueList.size(); ++i) {

@@ -14,13 +14,11 @@ public class Abs implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Value inputValue = valueList.get(0);
-
-    if (!inputValue.isNumber()) {
-      throw new ExpressionException("abs-function can only operate on numbers");
+    if (!valueList.allIsNumber()) {
+      throw new ExpressionException(getName()+"-function can only operate on numbers");
     }
 
-    return Value.of(inputValue.toBigDecimal().abs());
+    return Value.of(valueList.getBigDecimal(0).abs());
   }
 
   @Override

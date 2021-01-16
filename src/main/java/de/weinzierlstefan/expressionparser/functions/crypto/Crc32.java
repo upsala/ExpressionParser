@@ -16,7 +16,7 @@ public class Crc32 implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
 
     CRC32 crc = new CRC32();
     crc.update(str.getBytes());

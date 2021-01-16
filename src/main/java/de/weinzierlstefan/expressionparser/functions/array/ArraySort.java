@@ -14,7 +14,10 @@ public class ArraySort implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    ValueList list = valueList.get(0).toArray();
+    ValueList list = valueList.getArray(0);
+    if (list==null) {
+      throw new ExpressionException("Value must be a array");
+    }
 
     list.sort((o1, o2) -> o1.compareTo(o2));
 

@@ -14,14 +14,14 @@ public class Left implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str = valueList.get(0).toString();
+    String str = valueList.getString(0);
 
-    if (!valueList.get(1).isNumber()) {
+    if (!valueList.isNumber(1)) {
       throw new ExpressionException("position must be a number");
     }
 
     int length = str.length();
-    long pos = valueList.get(1).toLong();
+    long pos = valueList.getLong(1);
     if (pos>length) {
       pos = length;
     }

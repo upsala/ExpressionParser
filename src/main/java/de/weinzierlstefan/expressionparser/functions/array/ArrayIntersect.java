@@ -14,8 +14,8 @@ public class ArrayIntersect implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    ValueList list1 = valueList.get(0).toArray();
-    ValueList list2 = valueList.get(1).toArray();
+    ValueList list1 = valueList.getArray(0);
+    ValueList list2 = valueList.getArray(1);
     if (list1==null || list2==null) {
       throw new ExpressionException("Parameters must be a arrays");
     }

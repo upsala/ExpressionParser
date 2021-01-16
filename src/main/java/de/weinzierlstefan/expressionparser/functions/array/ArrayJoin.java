@@ -14,7 +14,7 @@ public class ArrayJoin implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    ValueList list = valueList.get(0).toArray();
+    ValueList list = valueList.getArray(0);
     if (list==null) {
       throw new ExpressionException("First parameter must be a array");
     }
@@ -23,7 +23,7 @@ public class ArrayJoin implements Function {
     boolean first = true;
     for(Value value : list) {
       if (!first && valueList.size()>1) {
-        builder.append(valueList.get(1).toString());
+        builder.append(valueList.getString(1));
       }
       first = false;
       builder.append(value.toString());

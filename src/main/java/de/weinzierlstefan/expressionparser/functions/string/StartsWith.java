@@ -14,8 +14,8 @@ public class StartsWith implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    String str1 = valueList.get(0).toString();
-    String str2 = valueList.get(1).toString();
+    String str1 = valueList.getString(0);
+    String str2 = valueList.getString(1);
 
     return Value.of(str1.startsWith(str2));
   }

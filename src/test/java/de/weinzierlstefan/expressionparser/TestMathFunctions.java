@@ -131,7 +131,8 @@ public class TestMathFunctions {
 
   @Test
   public void testRandom() throws ExpressionException {
-    assertNotEquals("0", new DefaultExpressionParser().parse("random()-random()").eval().toString());
+    double result = new DefaultExpressionParser().parse("random()").eval().toDouble();
+    assertTrue(result>=0 && result<1);
   }
 
   @Test

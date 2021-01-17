@@ -1,5 +1,6 @@
 de.weinzierlstefan.expressionparser
 de.weinzierlstefan.expressionparser.functions.array
+de.weinzierlstefan.expressionparser.functions.bit
 de.weinzierlstefan.expressionparser.functions.common
 de.weinzierlstefan.expressionparser.functions.crypto
 de.weinzierlstefan.expressionparser.functions.datetime

@@ -13,7 +13,7 @@ public class StatisticsFunctions {
     functionCollection.add(new Cpk());
     functionCollection.add(new Kurtosis());
     functionCollection.add(new Mean());
-    functionCollection.add(new Modus());
+    functionCollection.add(new Mode());
     functionCollection.add(new Percentile());
     functionCollection.add(new Range());
     functionCollection.add(new Skewness());

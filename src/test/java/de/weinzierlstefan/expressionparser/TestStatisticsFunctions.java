@@ -27,9 +27,9 @@ public class TestStatisticsFunctions {
   }
 
   @Test
-  public void testModus() throws ExpressionException {
-    assertEquals("3", new DefaultExpressionParser().parse("modus([1,2,3,3])").eval().toString());
-    assertEquals("1", new DefaultExpressionParser().parse("modus([1])").eval().toString());
+  public void testMode() throws ExpressionException {
+    assertEquals("3", new DefaultExpressionParser().parse("mode([1,2,3,3])").eval().toString());
+    assertEquals("1", new DefaultExpressionParser().parse("mode([1])").eval().toString());
   }
 
   @Test

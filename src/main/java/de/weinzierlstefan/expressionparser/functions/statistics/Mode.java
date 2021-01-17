@@ -9,10 +9,10 @@ import de.weinzierlstefan.expressionparser.value.ValueList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Modus implements Function {
+public class Mode implements Function {
   @Override
   public String getName() {
-    return "modus";
+    return "mode";
   }
 
   @Override

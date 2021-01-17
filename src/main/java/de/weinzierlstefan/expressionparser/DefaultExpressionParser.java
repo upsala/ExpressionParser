@@ -1,6 +1,7 @@
 package de.weinzierlstefan.expressionparser;
 
 import de.weinzierlstefan.expressionparser.functions.array.ArrayFunctions;
+import de.weinzierlstefan.expressionparser.functions.bit.BitFunctions;
 import de.weinzierlstefan.expressionparser.functions.common.CommonFunctions;
 import de.weinzierlstefan.expressionparser.functions.crypto.CryptoFunctions;
 import de.weinzierlstefan.expressionparser.functions.datetime.DateTimeFunctions;
@@ -26,6 +27,7 @@ public class DefaultExpressionParser extends ExpressionParser {
     addFunctions(ArrayFunctions.getFunctions());
     addFunctions(CryptoFunctions.getFunctions());
     addFunctions(StatisticsFunctions.getFunctions());
+    addFunctions(BitFunctions.getFunctions());
 
     setVariable("true", Value.of(true));
     setVariable("false", Value.of(false));

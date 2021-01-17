@@ -5,6 +5,14 @@
 2. [Quick start](#quick-start)
 3. [Variables](#variables)
 4. [Functions](#functions)
+    1. [Common-Functions](#common-functions)
+    2. [Math-Functions](#math-functions)
+    3. [String-Functions](#string-functions)
+    4. [Date/Time-Functions](#datetime-functions)
+    5. [Crypto-Functions](#crypto-functions)
+    6. [Array-Functions](#array-functions)
+    7. [Statistics-Functions](#statistics-functions)
+    8. [Bit-Functions](#bit-functions)
 5. [TODO](#todo) 
 6. [Author and License](#author-and-license)
 
@@ -42,7 +50,7 @@ System.out.println(result); // 15
 
 ### Operators
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | + - |  |
 | * / % |  |
 | && \|\| \^\^ |  |
@@ -115,6 +123,7 @@ System.out.println(result); // 15
 | TAN(x) | Returns the tangens of x in degrees |
 | TANR(x) | Returns the tangens of x in radians |
 
+#### String-Functions
 | Function | Description |
 |:--------------|:-------------|
 | CONCAT(str, ...) | Concatenate all values to a string |
@@ -142,7 +151,7 @@ System.out.println(result); // 15
 | TRIM(str) | Removes all whitespaces on both sides of str |
 | UPPER(str) | Converts the chars of str to uppercase letters |
 
-
+#### Date/Time-Functions
 | Function | Description |
 |:--------------|:-------------|
 | ADDDAY(ts, x) | Adds x days to timestamp ts |
@@ -195,7 +204,7 @@ System.out.println(result); // 15
 | WEEK(x) | Returns the ISO-week of date x (1-53) |
 | YEAR(x) | Returns the year of date x |
 
-
+####Crypto-Functions
 | Function | Description |
 |:--------------|:-------------|
 | CRC32(str, ...) | Calculates the crc32 of the given values |
@@ -204,7 +213,7 @@ System.out.println(result); // 15
 | SHA256(str, ...) | Calculates the sha256 of the given values |
 | UUID() | Generates a UUID |
 
-
+####Array-Functions
 | Function | Description |
 |:--------------|:-------------|
 | ARRAY(...) | Builds an array, with the provided values |
@@ -231,7 +240,7 @@ System.out.println(result); // 15
 | ARRAYUNION(arr, ...) | |
 | ARRAYVALUES() | Returns the values of the array |
 
-
+####Statistics-Functions
 | Function | Description |
 |:--------------|:-------------|
 | CP(lsl, osl, arr) | Calculates the process capability index |
@@ -245,6 +254,16 @@ System.out.println(result); // 15
 | STD(arr) | Calculates the the standard deviation of the given array |
 | SUM(arr) | Returns the summary of all values, nulls are ignored |
 | VAR(arr) | Calculates the variance of the given array |
+
+####Bit-Functions
+| Function | Description |
+|:--------------|:-------------|
+| clearBit(x, pos, ...) | Clears the bit of x at all given positions |
+| extractBits(x, start, end) | Copy the bits from x from position start to end |
+| invertBit(x, pos, ...) | Inverts the bit of x at all given positions |
+| setBit(x, pos, ...) | Sets the bit of x at all given positions |
+| testBit(x, pos) | Tests the bit of x at the given position |
+
 
 ### TODO
 - This README

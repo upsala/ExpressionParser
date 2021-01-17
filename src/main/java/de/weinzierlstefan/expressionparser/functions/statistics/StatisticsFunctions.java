@@ -9,7 +9,6 @@ public class StatisticsFunctions {
   public static Collection<Function> getFunctions() {
     Collection<Function> functionCollection = new ArrayList<>();
 
-    functionCollection.add(new Avg());
     functionCollection.add(new Cp());
     functionCollection.add(new Cpk());
     functionCollection.add(new Kurtosis());

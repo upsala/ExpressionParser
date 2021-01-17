@@ -21,7 +21,7 @@ public class StatisticTools {
     return sum;
   }
 
-  public static BigDecimal avg(ValueList list, ExecutorContext executorContext) throws ExpressionException {
+  public static BigDecimal mean(ValueList list, ExecutorContext executorContext) throws ExpressionException {
 
     BigDecimal sum = StatisticTools.sum(list);
 
@@ -39,7 +39,7 @@ public class StatisticTools {
   }
 
   public static BigDecimal var(ValueList list, ExecutorContext executorContext) throws ExpressionException {
-    BigDecimal avg = StatisticTools.avg(list, executorContext);
+    BigDecimal avg = StatisticTools.mean(list, executorContext);
 
     BigDecimal sum = BigDecimal.ZERO;
 

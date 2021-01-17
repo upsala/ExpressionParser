@@ -24,7 +24,7 @@ public class Kurtosis implements Function {
 
     BigDecimal sum = BigDecimal.ZERO;
 
-    BigDecimal avg = StatisticTools.avg(list, executorContext);
+    BigDecimal avg = StatisticTools.mean(list, executorContext);
 
     BigDecimal std = StatisticTools.std(list, executorContext);
 

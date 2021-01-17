@@ -6,6 +6,8 @@ import de.weinzierlstefan.expressionparser.Function;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueList;
 
+import java.math.BigDecimal;
+
 public class Mean implements Function {
   @Override
   public String getName() {
@@ -14,7 +16,18 @@ public class Mean implements Function {
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    return null;
+    ValueList list = valueList.getArray(0);
+    if (list==null) {
+      throw new ExpressionException("Parameter must be a array");
+    }
+
+    if (list.isEmpty()) {
+      throw new ExpressionException("Array is empty");
+    }
+
+    BigDecimal avg = StatisticTools.mean(list, executorContext);
+
+    return Value.of(avg);
   }
 
   @Override

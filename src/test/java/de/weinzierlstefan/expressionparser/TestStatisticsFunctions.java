@@ -6,12 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestStatisticsFunctions {
   @Test
-  public void testAvg() throws ExpressionException {
-    assertEquals("2", new DefaultExpressionParser().parse("avg([1,2,3])").eval().toString());
-    assertEquals("1", new DefaultExpressionParser().parse("avg([1])").eval().toString());
-  }
-
-  @Test
   public void testCp() throws ExpressionException {
     assertEquals("0.40825", new DefaultExpressionParser().parse("round(cp(1,3,[1,2,3]),5)").eval().toString());
   }
@@ -26,9 +20,10 @@ public class TestStatisticsFunctions {
     assertEquals("9", new DefaultExpressionParser().parse("round(kurtosis([1,1,2,2,3,3]),5)").eval().toString());
   }
 
-
   @Test
   public void testMean() throws ExpressionException {
+    assertEquals("2", new DefaultExpressionParser().parse("mean([1,2,3])").eval().toString());
+    assertEquals("1", new DefaultExpressionParser().parse("mean([1])").eval().toString());
   }
 
   @Test

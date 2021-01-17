@@ -26,7 +26,7 @@ public class Cpk implements Function {
     BigDecimal usg = valueList.getBigDecimal(0);
     BigDecimal osg = valueList.getBigDecimal(1);
 
-    BigDecimal avg = StatisticTools.avg(list, executorContext);
+    BigDecimal avg = StatisticTools.mean(list, executorContext);
     BigDecimal std = StatisticTools.std(list, executorContext);
 
     BigDecimal usg1 = avg.subtract(usg, executorContext.getMathContext());

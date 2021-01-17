@@ -2,12 +2,43 @@
 
 ## Table of contents
 1. [General Info](#general-info)
-2. [Variables](#variables)
-3. [Functions](#functions)
-4. [TODO](#todo) 
-5. [Author and License](#author-and-license)
+2. [Quick start](#quick-start)
+3. [Variables](#variables)
+4. [Functions](#functions)
+5. [TODO](#todo) 
+6. [Author and License](#author-and-license)
 
 ### General Info
+ExpressionParser is a expression evaluator for Java, that allows to evaluate expressions, with a rich set of functions.
+
+Key Features:
+- Uses BigDecimal for calculation and result where possible
+- Many difference datatypes (BigDecimal, Double, String, Temporal, List, Map, null, Boolean)
+- No dependencies to external libraries
+- Precision and rounding mode can be set
+- Supports variables and variable-containers
+- Standard boolean and mathematical operators
+- Custom functions can be added at runtime
+- Functions can be defined with a variable number of arguments
+- A rich set of basic mathematical and boolean functions
+- A rich set of functions for array-, string- and timestamp-manipulation
+- Crypto- and statistic-functions
+- Caching of expressions
+- Allows variable-aliases (WITH)
+- User can decide, which functions should be enabled by default
+
+### Quick start
+```java
+System.out.println(new ExpressionParser().parse("1+2+3").eval()); //6
+
+  
+ExpressionParser parser = new ExpressionParser();
+Expression expr = parser.parse("3*a");
+expr.setVariable("a", Value.of(5));
+Value result = expr.eval();
+
+System.out.println(result); // 15
+```
 
 ### Operators
 | Function | Description |
@@ -37,7 +68,7 @@
 ### Functions
 #### Common-Functions
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | BETWEEN(low, x, high) | Is x between low and high? |
 | BOUND(low, x, high) | Returns low if x<low, or returns high if x>high else return x |
 | IFNULL(x, ...) | Returns the first value which is not null, if all values are null, null is returned |
@@ -50,7 +81,7 @@
 
 #### Math-Functions
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | ABS(x) | Returns the absolute (non-negative) value of x |
 | ACOS(x) | Returns the arcus cosinus of x in degrees |
 | ACOSR(x) | Returns the arcus cosinus of x in radians |
@@ -85,7 +116,7 @@
 | TANR(x) | Returns the tangens of x in radians |
 
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | CONCAT(str, ...) | Concatenate all values to a string |
 | CONCATWS(sep, str, ...) | Concatenate all values to a string, with the given separator |
 | ENDSWITH(str, search) | Returns true if str ends with search |
@@ -113,7 +144,7 @@
 
 
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | ADDDAY(ts, x) | Adds x days to timestamp ts |
 | ADDHOUR(ts, x) | Adds x hours to timestamp ts |
 | ADDMINUTE(ts, x) | Adds x minutes to timestamp ts |
@@ -166,7 +197,7 @@
 
 
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | CRC32(str, ...) | Calculates the crc32 of the given values |
 | MD5(str, ...) | Calculates the md5 of the given values |
 | SHA1(str, ...) | Calculates the sha1 of the given values |
@@ -175,7 +206,7 @@
 
 
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | ARRAY(...) | Builds an array, with the provided values |
 | ARRAYCONCAT(arr, ...) |  |
 | ARRAYCOUNT(arr) | Returns the length of the array |
@@ -202,7 +233,7 @@
 
 
 | Function | Description |
-|:--------------|:-------------:|
+|:--------------|:-------------|
 | CP(lsl, osl, arr) | Calculates the process capability index |
 | CPK(lsl, osl, arr) | Calculates the process capability index |
 | KURTOSIS(arr) | Calculates the kurtosis of the givven array |

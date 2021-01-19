@@ -24,11 +24,7 @@ public class InvertBit implements Function {
     for(int i=1; i<valueList.size(); ++i) {
       int pos = (int) valueList.getLong(i);
       if (pos>=0) {
-        if (value.testBit(pos)) {
-          value = value.clearBit(pos);
-        } else {
-          value = value.setBit(pos);
-        }
+        value = value.flipBit(pos);
       }
     }
 

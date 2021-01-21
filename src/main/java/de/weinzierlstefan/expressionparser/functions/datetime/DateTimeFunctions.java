@@ -47,6 +47,7 @@ public class DateTimeFunctions {
     functionCollection.add(new SetHour());
     functionCollection.add(new SetMinute());
     functionCollection.add(new SetMonth());
+    functionCollection.add(new SetNanoSecond());
     functionCollection.add(new SetSecond());
     functionCollection.add(new SetYear());
     functionCollection.add(new SubDay());

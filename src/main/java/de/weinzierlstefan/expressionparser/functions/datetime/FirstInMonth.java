@@ -22,7 +22,7 @@ public class FirstInMonth implements Function {
       throw new ExpressionException("Value must be a DateTime");
     }
 
-    DayOfWeek dow = DayOfWeek.valueOf(valueList.get(1).toString());
+    DayOfWeek dow = DayOfWeek.valueOf(valueList.get(1).toString().toUpperCase());
 
     Temporal t = valueTemportal.toTemporal();
 

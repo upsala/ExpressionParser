@@ -18,9 +18,9 @@ public class Cot implements Function {
       throw new ExpressionException(getName()+"-function can only operate on numbers");
     }
 
-    double value = valueList.getDouble(0);
+    double value = Math.toRadians(valueList.getDouble(0));
 
-    return Value.of(Math.toDegrees(Math.cos(value)/Math.sin(value)));
+    return Value.of(Math.cos(value)/Math.sin(value));
   }
 
   @Override

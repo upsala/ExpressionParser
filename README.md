@@ -204,7 +204,7 @@ System.out.println(result); // 15
 | WEEK(x) | Returns the ISO-week of date x (1-53) |
 | YEAR(x) | Returns the year of date x |
 
-####Crypto-Functions
+#### Crypto-Functions
 | Function | Description |
 |:--------------|:-------------|
 | CRC32(str, ...) | Calculates the crc32 of the given values |
@@ -213,7 +213,7 @@ System.out.println(result); // 15
 | SHA256(str, ...) | Calculates the sha256 of the given values |
 | UUID() | Generates a UUID |
 
-####Array-Functions
+#### Array-Functions
 | Function | Description |
 |:--------------|:-------------|
 | ARRAY(...) | Builds an array, with the provided values |
@@ -240,7 +240,7 @@ System.out.println(result); // 15
 | ARRAYUNION(arr, ...) | |
 | ARRAYVALUES() | Returns the values of the array |
 
-####Statistics-Functions
+#### Statistics-Functions
 | Function | Description |
 |:--------------|:-------------|
 | CP(lsl, osl, arr) | Calculates the process capability index |
@@ -255,7 +255,7 @@ System.out.println(result); // 15
 | SUM(arr) | Returns the summary of all values, nulls are ignored |
 | VAR(arr) | Calculates the variance of the given array |
 
-####Bit-Functions
+#### Bit-Functions
 | Function | Description |
 |:--------------|:-------------|
 | clearBit(x, pos, ...) | Clears the bit of x at all given positions |

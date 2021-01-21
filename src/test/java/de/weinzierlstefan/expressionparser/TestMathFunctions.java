@@ -71,12 +71,12 @@ public class TestMathFunctions {
 
   @Test
   public void testCot() throws ExpressionException {
-    assertEquals("60", new DefaultExpressionParser().parse("acos(0.5)").eval().toString());
+    assertEquals("1", new DefaultExpressionParser().parse("cot(45)").eval().toString());
   }
 
   @Test
   public void testCotR() throws ExpressionException {
-    assertEquals("60", new DefaultExpressionParser().parse("acos(0.5)").eval().toString());
+    assertEquals("0", new DefaultExpressionParser().parse("round(cotr(PI/2),5)").eval().toString());
   }
 
   @Test

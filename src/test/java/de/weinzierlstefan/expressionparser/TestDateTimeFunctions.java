@@ -89,6 +89,12 @@ public class TestDateTimeFunctions {
   }
 
   @Test
+  public void testDiffNanoSecond() throws ExpressionException {
+    assertEquals("100", new DefaultExpressionParser().parse("diffnanosecond(datetime(2020,3,5,7,9,11,100),datetime(2020,3,5,7,9,11,200))").eval().toString());
+    assertEquals("-100", new DefaultExpressionParser().parse("diffnanosecond(datetime(2020,3,5,7,9,11,200),datetime(2020,3,5,7,9,11,100))").eval().toString());
+  }
+
+  @Test
   public void testDiffSecond() throws ExpressionException {
     assertEquals("1", new DefaultExpressionParser().parse("diffsecond(datetime(2020,3,5,7,9,11),datetime(2020,3,5,7,9,12))").eval().toString());
     assertEquals("-1", new DefaultExpressionParser().parse("diffsecond(datetime(2020,3,5,7,9,11),datetime(2020,3,5,7,9,10))").eval().toString());
@@ -102,32 +108,28 @@ public class TestDateTimeFunctions {
 
   @Test
   public void testFirstDayOfMonth() throws ExpressionException {
-    assertEquals("1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2021,3,5,7,9,11))").eval().toString());
-    assertEquals("-1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2019,3,5,7,9,11))").eval().toString());
+    assertEquals("2020-03-01T07:09:11", new DefaultExpressionParser().parse("firstdayofmonth(datetime(2020,3,5,7,9,11))").eval().toString());
   }
 
   @Test
   public void testFirstDayOfNextMonth() throws ExpressionException {
-    assertEquals("1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2021,3,5,7,9,11))").eval().toString());
-    assertEquals("-1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2019,3,5,7,9,11))").eval().toString());
+    assertEquals("2020-04-01T07:09:11", new DefaultExpressionParser().parse("firstdayofnextmonth(datetime(2020,3,5,7,9,11))").eval().toString());
   }
 
   @Test
   public void testFirstDayOfNextYear() throws ExpressionException {
-    assertEquals("1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2021,3,5,7,9,11))").eval().toString());
-    assertEquals("-1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2019,3,5,7,9,11))").eval().toString());
+    assertEquals("2021-01-01T07:09:11", new DefaultExpressionParser().parse("firstdayofnextyear(datetime(2020,3,5,7,9,11))").eval().toString());
   }
 
   @Test
   public void testFirstDayOfYear() throws ExpressionException {
-    assertEquals("1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2021,3,5,7,9,11))").eval().toString());
-    assertEquals("-1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2019,3,5,7,9,11))").eval().toString());
+    assertEquals("2020-01-01T07:09:11", new DefaultExpressionParser().parse("firstdayofyear(datetime(2020,3,5,7,9,11))").eval().toString());
   }
 
   @Test
   public void testFirstInMonth() throws ExpressionException {
-    assertEquals("1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2021,3,5,7,9,11))").eval().toString());
-    assertEquals("-1", new DefaultExpressionParser().parse("diffyear(datetime(2020,3,5,7,9,11),datetime(2019,3,5,7,9,11))").eval().toString());
+    assertEquals("2020-03-02T07:09:11", new DefaultExpressionParser().parse("firstinmonth(datetime(2020,3,5,7,9,11), 'MONDAY')").eval().toString());
+    assertEquals("2020-03-01T07:09:11", new DefaultExpressionParser().parse("firstinmonth(datetime(2020,3,1,7,9,11), 'sunday')").eval().toString());
   }
 
   @Test
@@ -227,6 +229,12 @@ public class TestDateTimeFunctions {
   }
 
   @Test
+  public void testSetNanoSecond() throws ExpressionException {
+    assertEquals("2020-03-05T07:09:11.000000001", new DefaultExpressionParser().parse("setnanosecond(datetime(2020,3,5,7,9,11), 1)").eval().toString());
+    assertEquals("07:09:11.000000001", new DefaultExpressionParser().parse("setnanosecond(time(7,9,11), 1)").eval().toString());
+  }
+
+  @Test
   public void testSetSecond() throws ExpressionException {
     assertEquals("2020-03-05T07:09:01", new DefaultExpressionParser().parse("setsecond(datetime(2020,3,5,7,9,11), 1)").eval().toString());
     assertEquals("07:09:01", new DefaultExpressionParser().parse("setsecond(time(7,9,11), 1)").eval().toString());
@@ -260,6 +268,12 @@ public class TestDateTimeFunctions {
   public void testSubMonth() throws ExpressionException {
     assertEquals("2020-02-05T07:09:11", new DefaultExpressionParser().parse("submonth(datetime(2020,3,5,7,9,11), 1)").eval().toString());
     assertEquals("2020-02-05", new DefaultExpressionParser().parse("submonth(date(2020,3,5), 1)").eval().toString());
+  }
+
+  @Test
+  public void testSubNanoSecond() throws ExpressionException {
+    assertEquals("2020-03-05T07:09:10.999999999", new DefaultExpressionParser().parse("subnanosecond(datetime(2020,3,5,7,9,11), 1)").eval().toString());
+    assertEquals("07:09:10.999999999", new DefaultExpressionParser().parse("subnanosecond(time(7,9,11), 1)").eval().toString());
   }
 
   @Test

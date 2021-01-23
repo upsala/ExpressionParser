@@ -134,13 +134,16 @@ loadScripts(document, 'script');</script>
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#parameterCount(int)">parameterCount</a></span>&#8203;(int&nbsp;count)</code></th>
 <td class="colLast">
-<div class="block">Returns true if the provided parameter-count maches the requirements</div>
+<div class="block">Returns true if the provided parameter-count maches the requirements
+ execute will only be called, if this function returns true.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>default boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#returnsNullOnNull()">returnsNullOnNull</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">If this method returns true, the execute will only be called, if all given values are not null</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -190,7 +193,8 @@ loadScripts(document, 'script');</script>
 <section class="detail">
 <h3><a id="parameterCount(int)">parameterCount</a></h3>
 <div class="memberSignature"><span class="returnType">boolean</span>&nbsp;<span class="memberName">parameterCount</span>&#8203;(<span class="arguments">int&nbsp;count)</span></div>
-<div class="block">Returns true if the provided parameter-count maches the requirements</div>
+<div class="block">Returns true if the provided parameter-count maches the requirements
+ execute will only be called, if this function returns true.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>count</code> - </dd>
@@ -202,6 +206,7 @@ loadScripts(document, 'script');</script>
 <section class="detail">
 <h3><a id="returnsNullOnNull()">returnsNullOnNull</a></h3>
 <div class="memberSignature"><span class="modifiers">default</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">returnsNullOnNull</span>()</div>
+<div class="block">If this method returns true, the execute will only be called, if all given values are not null</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 </dl>

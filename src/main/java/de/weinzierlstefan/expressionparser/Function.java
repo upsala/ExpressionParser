@@ -24,14 +24,14 @@ public interface Function {
 
   /**
    * Returns true if the provided parameter-count maches the requirements
-   * @execute will only be called, if this function returns true.
+   * execute will only be called, if this function returns true.
    * @param count
    * @return
    */
   boolean parameterCount(int count);
 
   /**
-   *
+   * If this method returns true, the execute will only be called, if all given values are not null
    * @return
    */
   default boolean returnsNullOnNull() { return true; }

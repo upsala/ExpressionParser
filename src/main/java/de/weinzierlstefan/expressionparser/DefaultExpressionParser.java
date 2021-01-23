@@ -11,7 +11,7 @@ import de.weinzierlstefan.expressionparser.functions.string.StringFunctions;
 import de.weinzierlstefan.expressionparser.value.Value;
 
 /**
- * Creates @ExpressionParser which contains all Functions a
+ * Creates @ExpressionParser which contains all Functions
  */
 public class DefaultExpressionParser extends ExpressionParser {
   public DefaultExpressionParser() {

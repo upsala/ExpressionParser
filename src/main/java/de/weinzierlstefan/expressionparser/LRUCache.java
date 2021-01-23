@@ -11,11 +11,18 @@ import java.util.Map;
 public class LRUCache<K, V> extends LinkedHashMap<K, V> {
   private int cacheSize;
 
+  /**
+   * Constructs a new cache with a default size of 10
+   */
   public LRUCache() {
     super(16, 0.75f, true);
     this.cacheSize = 10;
   }
 
+  /**
+   * Constructs a new cache with the specified size
+   * @param cacheSize
+   */
   public LRUCache(int cacheSize) {
     super(16, 0.75f, true);
     this.cacheSize = cacheSize;
@@ -25,6 +32,10 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
     return size() >= cacheSize;
   }
 
+  /**
+   * Sets the size of the cache
+   * @param cacheSize
+   */
   public void setCacheSize(int cacheSize) {
     this.cacheSize=cacheSize;
   }

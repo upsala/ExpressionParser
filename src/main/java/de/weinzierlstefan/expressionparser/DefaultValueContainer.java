@@ -7,15 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A default-Implention from the VariableHolder
+ * A default-Implemention of ValueContainer
  */
 public class DefaultValueContainer extends ValueContainer {
   @Override
   public Value get(String name) {
     return valueMap.get(name);
   }
-
-
 
   /**
    * Sets the @Value of a variable, existing variables will be overwritten
@@ -27,7 +25,7 @@ public class DefaultValueContainer extends ValueContainer {
   }
 
   /**
-   * Clears the Holder
+   * Clears the Container
    */
   public void clear() {
     valueMap.clear();

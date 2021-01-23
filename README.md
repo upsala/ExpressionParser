@@ -80,12 +80,12 @@ System.out.println(result); // 15
 | BETWEEN(low, x, high) | Is x between low and high? |
 | BOUND(low, x, high) | Returns low if x<low, or returns high if x>high else return x |
 | IFNULL(x, ...) | Returns the first value which is not null, if all values are null, null is returned |
-| ISARRAY() | Is X a array? |
-| ISNULL() | Is X = NULL? |
-| ISNUMBER() | Is X a number? |
-| ISSTRING() | Is X a string? |
+| ISARRAY(x) | Is X a array? |
+| ISNULL(x) | Is X = NULL? |
+| ISNUMBER(x) | Is X a number? |
+| ISSTRING(x) | Is X a string? |
 | MAX(x, ...) | Returns the biggest value |
-| MIN(str) | Returns the smallest value |
+| MIN(x, ...) | Returns the smallest value |
 
 #### Math-Functions
 | Function | Description |

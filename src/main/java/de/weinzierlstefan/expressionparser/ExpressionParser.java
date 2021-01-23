@@ -888,6 +888,9 @@ public class ExpressionParser {
     Executor value = null;
   }
 
+  private final static class ExecutorList extends ArrayList<Executor> {
+  }
+
   private final LRUCache<String, Executor> executorCache = new LRUCache<>(10);
 
   private final Map<String, Function> functionMap = new HashMap<>();

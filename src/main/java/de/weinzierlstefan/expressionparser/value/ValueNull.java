@@ -5,15 +5,10 @@ public class ValueNull extends Value {
 
   @Override
   public int compareTo(Value v2) {
-    if (v2 instanceof ValueNull) {
+    if (v2.isNull()) {
       return 0;
     }
     return -1;
-  }
-
-  @Override
-  public int getType() {
-    return NULL;
   }
 
   @Override

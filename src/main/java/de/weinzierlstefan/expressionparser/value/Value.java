@@ -8,19 +8,8 @@ import java.util.Collection;
 import java.util.Map;
 
 public abstract class Value implements Comparable<Value> {
-  public static final int NUMBER = 1;
-  public static final int STRING = 2;
-  public static final int ARRAY = 3;
-  public static final int OBJECT = 4;
-  public static final int TEMPORAL = 5;
-  public static final int LONG = 6;
-  public static final int DOUBLE = 7;
-  public static final int BOOLEAN = 8;
-  public static final int BIGDECIMAL = 9;
-  public static final int CONTAINER = 10;
-  public static final int NULL = 11;
 
-  Value() {
+  protected Value() {
   }
 
   /**
@@ -195,13 +184,6 @@ public abstract class Value implements Comparable<Value> {
   abstract public int compareTo(Value v2);
 
   /**
-   * Gets the type of the Value, possible types are {@link #NUMBER}, {@link #STRING}, {@link #ARRAY}, {@link #TEMPORAL}, {@link #LONG}, {@link #DOUBLE}, {@link #BOOLEAN},
-   * {@link #BIGDECIMAL}, {@link #CONTAINER} and {@link #NULL}
-   * @return
-   */
-  abstract public int getType();
-
-  /**
    * Returns true if {@link Value} is a {@link ValueLong}, {@link ValueDouble}, a {@link ValueBigDecimal} or a {@link ValueBoolean}
    * @return
    */
@@ -249,6 +231,12 @@ public abstract class Value implements Comparable<Value> {
    */
   public boolean isNull() { return false; }
 
+  /**
+   * Returns true if {@link Value} is a {@link ValueContainer}
+   * @return
+   */
+  public boolean isContainer() { return false; }
+
   @Override
   public boolean equals(Object o) {
     return false;
@@ -261,6 +249,4 @@ public abstract class Value implements Comparable<Value> {
   public ValueList toArray() {
     return null;
   }
-
-
 }

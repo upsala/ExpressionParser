@@ -12,14 +12,12 @@ public abstract class ValueContainer extends Value {
   public abstract Value get(String name);
 
   @Override
-  public int getType() {
-    return Value.CONTAINER;
-  }
-
-  @Override
   public boolean isArray() {
     return true;
   }
+
+  @Override
+  public boolean isContainer() { return true; }
 
   @Override
   public int compareTo(Value v2) { return -1; }

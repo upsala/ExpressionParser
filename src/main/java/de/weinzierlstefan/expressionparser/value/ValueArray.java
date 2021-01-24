@@ -33,11 +33,6 @@ public class ValueArray extends Value {
     return true;
   }
 
-  @Override
-  public int getType() {
-    return ARRAY;
-  }
-
   public String toString() {
     StringJoiner joiner = new StringJoiner(",", "[", "]");
 

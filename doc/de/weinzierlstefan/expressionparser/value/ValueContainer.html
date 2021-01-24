@@ -56,7 +56,7 @@ loadScripts(document, 'script');</script>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -107,19 +107,6 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 </section>
 <section class="summary">
 <ul class="blockList">
-<!-- =========== FIELD SUMMARY =========== -->
-<li class="blockList">
-<section class="fieldSummary"><a id="field.summary">
-<!--   -->
-</a>
-<h2>Field Summary</h2>
-<div class="inheritedList">
-<h3>Fields inherited from class&nbsp;de.weinzierlstefan.expressionparser.value.<a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></h3>
-<a id="fields.inherited.from.class.de.weinzierlstefan.expressionparser.value.Value">
-<!--   -->
-</a><code><a href="Value.html#ARRAY">ARRAY</a>, <a href="Value.html#BIGDECIMAL">BIGDECIMAL</a>, <a href="Value.html#BOOLEAN">BOOLEAN</a>, <a href="Value.html#CONTAINER">CONTAINER</a>, <a href="Value.html#DOUBLE">DOUBLE</a>, <a href="Value.html#LONG">LONG</a>, <a href="Value.html#NULL">NULL</a>, <a href="Value.html#NUMBER">NUMBER</a>, <a href="Value.html#OBJECT">OBJECT</a>, <a href="Value.html#STRING">STRING</a>, <a href="Value.html#TEMPORAL">TEMPORAL</a></code></div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li class="blockList">
 <section class="constructorSummary"><a id="constructor.summary">
@@ -176,18 +163,17 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Gets the type of the Value, possible types are <a href="Value.html#NUMBER"><code>Value.NUMBER</code></a>, <a href="Value.html#STRING"><code>Value.STRING</code></a>, <a href="Value.html#ARRAY"><code>Value.ARRAY</code></a>, <a href="Value.html#TEMPORAL"><code>Value.TEMPORAL</code></a>, <a href="Value.html#LONG"><code>Value.LONG</code></a>, <a href="Value.html#DOUBLE"><code>Value.DOUBLE</code></a>, <a href="Value.html#BOOLEAN"><code>Value.BOOLEAN</code></a>,
- <a href="Value.html#BIGDECIMAL"><code>Value.BIGDECIMAL</code></a>, <a href="Value.html#CONTAINER"><code>Value.CONTAINER</code></a> and <a href="Value.html#NULL"><code>Value.NULL</code></a></div>
-</td>
-</tr>
-<tr class="rowColor" id="i3">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isArray()">isArray</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if <a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value"><code>Value</code></a> is a <a href="ValueArray.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueArray</code></a></div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isContainer()">isContainer</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns true if <a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value"><code>Value</code></a> is a <a href="ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a></div>
 </td>
 </tr>
 </tbody>
@@ -247,20 +233,6 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="getType()">getType</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getType</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Value.html#getType()">Value</a></code></span></div>
-<div class="block">Gets the type of the Value, possible types are <a href="Value.html#NUMBER"><code>Value.NUMBER</code></a>, <a href="Value.html#STRING"><code>Value.STRING</code></a>, <a href="Value.html#ARRAY"><code>Value.ARRAY</code></a>, <a href="Value.html#TEMPORAL"><code>Value.TEMPORAL</code></a>, <a href="Value.html#LONG"><code>Value.LONG</code></a>, <a href="Value.html#DOUBLE"><code>Value.DOUBLE</code></a>, <a href="Value.html#BOOLEAN"><code>Value.BOOLEAN</code></a>,
- <a href="Value.html#BIGDECIMAL"><code>Value.BIGDECIMAL</code></a>, <a href="Value.html#CONTAINER"><code>Value.CONTAINER</code></a> and <a href="Value.html#NULL"><code>Value.NULL</code></a></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="Value.html#getType()">getType</a></code>&nbsp;in class&nbsp;<code><a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
 <h3><a id="isArray()">isArray</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isArray</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Value.html#isArray()">Value</a></code></span></div>
@@ -268,6 +240,19 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="Value.html#isArray()">isArray</a></code>&nbsp;in class&nbsp;<code><a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isContainer()">isContainer</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isContainer</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Value.html#isContainer()">Value</a></code></span></div>
+<div class="block">Returns true if <a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value"><code>Value</code></a> is a <a href="ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a></div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="Value.html#isContainer()">isContainer</a></code>&nbsp;in class&nbsp;<code><a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </section>
@@ -317,7 +302,7 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>

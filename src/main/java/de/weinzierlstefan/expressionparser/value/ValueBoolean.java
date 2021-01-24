@@ -20,11 +20,6 @@ public class ValueBoolean extends ValueNumber {
     return true;
   }
 
-  @Override
-  public int getType() {
-    return BOOLEAN;
-  }
-
   public long toLong() {
     return value ? 1 : 0;
   }

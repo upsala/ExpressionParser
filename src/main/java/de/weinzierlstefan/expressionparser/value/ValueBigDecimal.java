@@ -23,11 +23,6 @@ public class ValueBigDecimal extends ValueNumber {
     return value.toString();
   }
 
-  @Override
-  public int getType() {
-    return BIGDECIMAL;
-  }
-
   public boolean toBoolean() {
     return !value.equals(BigDecimal.ZERO);
   }

@@ -7,18 +7,12 @@ public class ValueString extends Value {
   public final static ValueString EMPTY = new ValueString("");
 
   private ValueString(String value) {
-    super();
     this.value = value;
   }
 
   @Override
   public String toString() {
     return value;
-  }
-
-  @Override
-  public int getType() {
-    return STRING;
   }
 
   @Override

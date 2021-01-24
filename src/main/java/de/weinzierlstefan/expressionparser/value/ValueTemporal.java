@@ -16,11 +16,6 @@ public class ValueTemporal extends Value {
     return new ValueTemporal(value);
   }
 
-  @Override
-  public int getType() {
-    return TEMPORAL;
-  }
-
   public boolean isTemporal() {
     return true;
   }

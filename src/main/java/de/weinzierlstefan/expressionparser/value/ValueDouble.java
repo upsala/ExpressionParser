@@ -18,11 +18,6 @@ public class ValueDouble extends ValueNumber {
     return true;
   }
 
-  @Override
-  public int getType() {
-    return DOUBLE;
-  }
-
   public double toDouble() {
     return value;
   }

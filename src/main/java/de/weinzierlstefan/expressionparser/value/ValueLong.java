@@ -12,11 +12,6 @@ public class ValueLong extends ValueNumber {
     return new ValueLong(value);
   }
 
-  @Override
-  public int getType() {
-    return LONG;
-  }
-
   public boolean isLong() { return true; }
 
   public long toLong() {

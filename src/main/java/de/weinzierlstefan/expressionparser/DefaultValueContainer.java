@@ -16,7 +16,7 @@ public class DefaultValueContainer extends ValueContainer {
   }
 
   /**
-   * Sets the @Value of a variable, existing variables will be overwritten
+   * Sets the {@link Value} of a variable, existing variables will be overwritten
    * @param name
    * @param value
    */

@@ -5,7 +5,7 @@ package de.weinzierlstefan.expressionparser.value;
  */
 public abstract class ValueContainer extends Value {
   /**
-   * Gets the @Value of a variable
+   * Gets the {@link Value} of a variable
    * @param name
    * @return
    */

@@ -93,6 +93,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <pre>public class <span class="typeNameLabel">ExecutorContext</span>
 extends java.lang.Object</pre>
+<div class="block">A context-class for the <code>Executor</code>, which holds the <code>MathContext</code> and all variables,
+ which are needed during exalution of a <a href="Expression.html" title="class in de.weinzierlstefan.expressionparser"><code>Expression</code></a></div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -118,7 +120,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.weinzierlstefan.expressionparser.ExecutorContext)">ExecutorContext</a></span>&#8203;(<a href="ExecutorContext.html" title="class in de.weinzierlstefan.expressionparser">ExecutorContext</a>&nbsp;otherCtx)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a copy of an other <a href="ExecutorContext.html" title="class in de.weinzierlstefan.expressionparser"><code>ExecutorContext</code></a></div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -146,27 +150,37 @@ extends java.lang.Object</pre>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addValueContainer(de.weinzierlstefan.expressionparser.value.ValueContainer)">addValueContainer</a></span>&#8203;(<a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value">ValueContainer</a>&nbsp;valueContainer)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a <a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a> to the list</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addValueContainers(java.util.Collection)">addValueContainers</a></span>&#8203;(java.util.Collection&lt;<a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value">ValueContainer</a>&gt;&nbsp;valueContainerList)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a collection of <a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a> to the list</div>
+</td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>java.math.MathContext</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMathContext()">getMathContext</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the <code>MathContext</code></div>
+</td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code><a href="value/Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVariable(java.lang.String)">getVariable</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Searches for the Variable 'name' in the internal <a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a>-List and returns its value or null.</div>
+</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMathContext(java.math.MathContext)">setMathContext</a></span>&#8203;(java.math.MathContext&nbsp;mathContext)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the <code>MathContext</code></div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -200,6 +214,11 @@ extends java.lang.Object</pre>
 <section class="detail">
 <h3><a id="&lt;init&gt;(de.weinzierlstefan.expressionparser.ExecutorContext)">ExecutorContext</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ExecutorContext</span>&#8203;(<span class="arguments"><a href="ExecutorContext.html" title="class in de.weinzierlstefan.expressionparser">ExecutorContext</a>&nbsp;otherCtx)</span></div>
+<div class="block">Constructs a copy of an other <a href="ExecutorContext.html" title="class in de.weinzierlstefan.expressionparser"><code>ExecutorContext</code></a></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>otherCtx</code> - </dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -216,30 +235,55 @@ extends java.lang.Object</pre>
 <section class="detail">
 <h3><a id="getMathContext()">getMathContext</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.math.MathContext</span>&nbsp;<span class="memberName">getMathContext</span>()</div>
+<div class="block">Gets the <code>MathContext</code></div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setMathContext(java.math.MathContext)">setMathContext</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMathContext</span>&#8203;(<span class="arguments">java.math.MathContext&nbsp;mathContext)</span></div>
+<div class="block">Sets the <code>MathContext</code></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>mathContext</code> - </dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getVariable(java.lang.String)">getVariable</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="value/Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></span>&nbsp;<span class="memberName">getVariable</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name)</span></div>
+<div class="block">Searches for the Variable 'name' in the internal <a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a>-List and returns its value or null.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="addValueContainer(de.weinzierlstefan.expressionparser.value.ValueContainer)">addValueContainer</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addValueContainer</span>&#8203;(<span class="arguments"><a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value">ValueContainer</a>&nbsp;valueContainer)</span></div>
+<div class="block">Adds a <a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a> to the list</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>valueContainer</code> - </dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="addValueContainers(java.util.Collection)">addValueContainers</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addValueContainers</span>&#8203;(<span class="arguments">java.util.Collection&lt;<a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value">ValueContainer</a>&gt;&nbsp;valueContainerList)</span></div>
+<div class="block">Adds a collection of <a href="value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a> to the list</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>valueContainerList</code> - </dd>
+</dl>
 </section>
 </li>
 </ul>

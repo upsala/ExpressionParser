@@ -77,7 +77,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/value/ValueContainer.html#get(java.lang.String)">get(String)</a></span> - Method in class de.weinzierlstefan.expressionparser.value.<a href="../de/weinzierlstefan/expressionparser/value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value">ValueContainer</a></dt>
 <dd>
-<div class="block">Gets the @Value of a variable</div>
+<div class="block">Gets the <a href="../de/weinzierlstefan/expressionparser/value/Value.html" title="class in de.weinzierlstefan.expressionparser.value"><code>Value</code></a> of a variable</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/value/ValueList.html#getArray(int)">getArray(int)</a></span> - Method in class de.weinzierlstefan.expressionparser.value.<a href="../de/weinzierlstefan/expressionparser/value/ValueList.html" title="class in de.weinzierlstefan.expressionparser.value">ValueList</a></dt>
 <dd>
@@ -144,7 +144,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Get the element at position index as Long</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/ExecutorContext.html#getMathContext()">getMathContext()</a></span> - Method in class de.weinzierlstefan.expressionparser.<a href="../de/weinzierlstefan/expressionparser/ExecutorContext.html" title="class in de.weinzierlstefan.expressionparser">ExecutorContext</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets the <code>MathContext</code></div>
+</dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/parser/TokenMgrError.html#getMessage()">getMessage()</a></span> - Method in error de.weinzierlstefan.expressionparser.parser.<a href="../de/weinzierlstefan/expressionparser/parser/TokenMgrError.html" title="class in de.weinzierlstefan.expressionparser.parser">TokenMgrError</a></dt>
 <dd>
 <div class="block">You can also modify the body of this method to customize your error messages.</div>
@@ -522,7 +524,10 @@ loadScripts(document, 'script');</script>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/parser/Operation.html#getType()">getType()</a></span> - Method in class de.weinzierlstefan.expressionparser.parser.<a href="../de/weinzierlstefan/expressionparser/parser/Operation.html" title="class in de.weinzierlstefan.expressionparser.parser">Operation</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/value/Value.html#getType()">getType()</a></span> - Method in class de.weinzierlstefan.expressionparser.value.<a href="../de/weinzierlstefan/expressionparser/value/Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets the type of the Value, possible types are <a href="../de/weinzierlstefan/expressionparser/value/Value.html#NUMBER"><code>Value.NUMBER</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#STRING"><code>Value.STRING</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#ARRAY"><code>Value.ARRAY</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#TEMPORAL"><code>Value.TEMPORAL</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#LONG"><code>Value.LONG</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#DOUBLE"><code>Value.DOUBLE</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#BOOLEAN"><code>Value.BOOLEAN</code></a>,
+ <a href="../de/weinzierlstefan/expressionparser/value/Value.html#BIGDECIMAL"><code>Value.BIGDECIMAL</code></a>, <a href="../de/weinzierlstefan/expressionparser/value/Value.html#CONTAINER"><code>Value.CONTAINER</code></a> and <a href="../de/weinzierlstefan/expressionparser/value/Value.html#NULL"><code>Value.NULL</code></a></div>
+</dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/value/ValueArray.html#getType()">getType()</a></span> - Method in class de.weinzierlstefan.expressionparser.value.<a href="../de/weinzierlstefan/expressionparser/value/ValueArray.html" title="class in de.weinzierlstefan.expressionparser.value">ValueArray</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/value/ValueBigDecimal.html#getType()">getType()</a></span> - Method in class de.weinzierlstefan.expressionparser.value.<a href="../de/weinzierlstefan/expressionparser/value/ValueBigDecimal.html" title="class in de.weinzierlstefan.expressionparser.value">ValueBigDecimal</a></dt>
@@ -550,7 +555,9 @@ loadScripts(document, 'script');</script>
 <div class="block">An optional attribute value of the Token.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/ExecutorContext.html#getVariable(java.lang.String)">getVariable(String)</a></span> - Method in class de.weinzierlstefan.expressionparser.<a href="../de/weinzierlstefan/expressionparser/ExecutorContext.html" title="class in de.weinzierlstefan.expressionparser">ExecutorContext</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Searches for the Variable 'name' in the internal <a href="../de/weinzierlstefan/expressionparser/value/ValueContainer.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueContainer</code></a>-List and returns its value or null.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="../de/weinzierlstefan/expressionparser/ExpressionParser.html#getVariable(java.lang.String)">getVariable(String)</a></span> - Method in class de.weinzierlstefan.expressionparser.<a href="../de/weinzierlstefan/expressionparser/ExpressionParser.html" title="class in de.weinzierlstefan.expressionparser">ExpressionParser</a></dt>
 <dd>
 <div class="block">Gets the value of a variable</div>

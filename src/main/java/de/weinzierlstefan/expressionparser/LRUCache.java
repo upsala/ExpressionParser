@@ -5,8 +5,8 @@ import java.util.Map;
 
 /**
  * A simple LRU-Cache for internal uses
- * @param <K>
- * @param <V>
+ * @param <K> the type of keys maintained by this cache
+ * @param <V> the type of values mapped by this cache
  */
 public class LRUCache<K, V> extends LinkedHashMap<K, V> {
   private int cacheSize;

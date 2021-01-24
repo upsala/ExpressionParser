@@ -23,7 +23,7 @@ public class Expression {
   }
 
   /**
-   * Evaluates the expression and returns a Value
+   * Evaluates the expression and returns a {@link Value}
    * @return Value
    * @throws ExpressionException
    */
@@ -32,7 +32,7 @@ public class Expression {
   }
 
   /**
-   * Adds a @Value as variable, which has a higher priority than the Variables from the @ExpressionParser
+   * Adds a {@link Value} as variable, which has a higher priority than the Variables from the {@link ExpressionParser}
    * @param name
    * @param value
    */
@@ -41,7 +41,7 @@ public class Expression {
   }
 
   /**
-   * Adds a @VariableHolder, which has a higher priority than the @VariableHolder from the @ExpressionParser
+   * Adds a {@link ValueContainer}, which has a higher priority than the {@link ValueContainer} from the {@link ExpressionParser}
    * @param valueContainer
    */
   public void addValueContainer(ValueContainer valueContainer) {

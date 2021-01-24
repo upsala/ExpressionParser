@@ -14,10 +14,10 @@ public interface Function {
   String getName();
 
   /**
-   * Executes this function and returns a @Value
+   * Executes this function and returns a {@link Value}
    * @param valueList
    * @param executorContext
-   * @return
+   * @return {@link Value}
    * @throws ExpressionException
    */
   Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException;
@@ -31,7 +31,7 @@ public interface Function {
   boolean parameterCount(int count);
 
   /**
-   * If this method returns true, the execute will only be called, if all given values are not null
+   * If this method returns true, {@link #execute(ValueList, ExecutorContext)} will only be called, if all given values are not null
    * @return
    */
   default boolean returnsNullOnNull() { return true; }

@@ -190,17 +190,24 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the type of the Value, possible types are <a href="Value.html#NUMBER"><code>Value.NUMBER</code></a>, <a href="Value.html#STRING"><code>Value.STRING</code></a>, <a href="Value.html#ARRAY"><code>Value.ARRAY</code></a>, <a href="Value.html#TEMPORAL"><code>Value.TEMPORAL</code></a>, <a href="Value.html#LONG"><code>Value.LONG</code></a>, <a href="Value.html#DOUBLE"><code>Value.DOUBLE</code></a>, <a href="Value.html#BOOLEAN"><code>Value.BOOLEAN</code></a>,
+ <a href="Value.html#BIGDECIMAL"><code>Value.BIGDECIMAL</code></a>, <a href="Value.html#CONTAINER"><code>Value.CONTAINER</code></a> and <a href="Value.html#NULL"><code>Value.NULL</code></a></div>
+</td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isNull()">isNull</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if <a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value"><code>Value</code></a> is a <a href="ValueNull.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueNull</code></a></div>
+</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toBoolean()">toBoolean</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Converts the value to a boolean if possible, otherwise false is returned</div>
+</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -282,9 +289,13 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 <section class="detail">
 <h3><a id="getType()">getType</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getType</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Value.html#getType()">Value</a></code></span></div>
+<div class="block">Gets the type of the Value, possible types are <a href="Value.html#NUMBER"><code>Value.NUMBER</code></a>, <a href="Value.html#STRING"><code>Value.STRING</code></a>, <a href="Value.html#ARRAY"><code>Value.ARRAY</code></a>, <a href="Value.html#TEMPORAL"><code>Value.TEMPORAL</code></a>, <a href="Value.html#LONG"><code>Value.LONG</code></a>, <a href="Value.html#DOUBLE"><code>Value.DOUBLE</code></a>, <a href="Value.html#BOOLEAN"><code>Value.BOOLEAN</code></a>,
+ <a href="Value.html#BIGDECIMAL"><code>Value.BIGDECIMAL</code></a>, <a href="Value.html#CONTAINER"><code>Value.CONTAINER</code></a> and <a href="Value.html#NULL"><code>Value.NULL</code></a></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Value.html#getType()">getType</a></code>&nbsp;in class&nbsp;<code><a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </section>
 </li>
@@ -292,9 +303,12 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 <section class="detail">
 <h3><a id="isNull()">isNull</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isNull</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Value.html#isNull()">Value</a></code></span></div>
+<div class="block">Returns true if <a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value"><code>Value</code></a> is a <a href="ValueNull.html" title="class in de.weinzierlstefan.expressionparser.value"><code>ValueNull</code></a></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="Value.html#isNull()">isNull</a></code>&nbsp;in class&nbsp;<code><a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </section>
 </li>
@@ -302,9 +316,12 @@ extends <a href="Value.html" title="class in de.weinzierlstefan.expressionparser
 <section class="detail">
 <h3><a id="toBoolean()">toBoolean</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">toBoolean</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Value.html#toBoolean()">Value</a></code></span></div>
+<div class="block">Converts the value to a boolean if possible, otherwise false is returned</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="Value.html#toBoolean()">toBoolean</a></code>&nbsp;in class&nbsp;<code><a href="Value.html" title="class in de.weinzierlstefan.expressionparser.value">Value</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </section>
 </li>

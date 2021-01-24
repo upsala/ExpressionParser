@@ -21,7 +21,7 @@ public class ExpressionParser {
   }
 
   /**
-   * Parses the provided expression and returns @Expression
+   * Parses the provided expression and returns {@link Expression}
    * @param expr
    * @return
    * @throws ExpressionException
@@ -838,7 +838,7 @@ public class ExpressionParser {
   }
 
   /**
-   * Adds a @VariableHolder
+   * Adds a {@link ValueContainer}
    * @param valueContainer
    */
   public void addValueContainer(ValueContainer valueContainer) {
@@ -863,7 +863,7 @@ public class ExpressionParser {
   }
 
   /**
-   * Sets the @MathContext for the parser and the newly generated @Expression
+   * Sets the {@link java.math.MathContext} for the parser and the newly generated {@link Expression}
    * @param mathContext
    */
   public void setMathContext(MathContext mathContext) {

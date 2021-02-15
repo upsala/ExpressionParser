@@ -74,5 +74,16 @@ public class TestVariables {
     assertEquals("1", expressionParser.parse("a").eval().toString());
   }
 
+  @Test
+  public void testMissing() throws ExpressionException {
+    String err = null;
+    try {
+      new ExpressionParser().parse("a=1").eval().toString();
+    } catch (ExpressionException ex) {
+      err = ex.getMessage();
+    }
+    assertEquals("Variable not found", err);
+  }
+
 
 }

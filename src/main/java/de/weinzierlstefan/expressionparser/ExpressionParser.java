@@ -563,7 +563,15 @@ public class ExpressionParser {
       return ctx -> ValueNull.INSTANCE;
     }
 
-    return ctx -> ctx.getVariable(name);
+    return ctx -> {
+      Value value = ctx.getVariable(name);
+
+      if (value==null) {
+        throw new ExpressionException("Variable not found");
+      }
+
+      return value;
+    };
   }
 
   private Executor handleVariableEsc(Operation op) {

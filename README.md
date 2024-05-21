@@ -58,5 +58,8 @@ public static void test3() {
 - Documentation
 - More testing
 
-### Author and License
-Copyright 2021-2024 by Weinzierl Stefan
+### Author
+2021-2024 Weinzierl Stefan
+
+### License
+Apache V2.0

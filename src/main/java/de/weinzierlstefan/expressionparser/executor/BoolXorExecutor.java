@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueBoolean;
@@ -21,6 +22,13 @@ public class BoolXorExecutor implements Executor {
     Value rightValue = right.exec(ctx);
 
     return ValueBoolean.of(leftValue.getBoolean() != rightValue.getBoolean());
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = left.getExecutorStats();
+    executorStats.merge(right.getExecutorStats());
+    return executorStats;
   }
 
   @Override

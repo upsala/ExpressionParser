@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.*;
 
@@ -42,6 +43,13 @@ public class PowerExecutor implements Executor {
         rightValue.getType()
       )
     );
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = left.getExecutorStats();
+    executorStats.merge(right.getExecutorStats());
+    return executorStats;
   }
 
   @Override

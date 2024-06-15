@@ -4,8 +4,9 @@
 1. [General Info](#general-info)
 2. [Quick start](#quick-start)
 3. [Documentation](doc/index.md)
-5. [TODO](#todo) 
+5. [TODO](#todo)
 6. [Author and License](#author-and-license)
+7. [Changelog](#changelog)
 
 ### General Info
 ExpressionParser is a expression evaluator for Java, that allows to evaluate expressions, with a rich set of functions.
@@ -63,3 +64,10 @@ public static void test3() {
 
 ### License
 Apache V2.0
+
+### Changelog
+#### Version 1.0.1
+- Introduced ExecutorStats
+
+#### Version 1.0
+- Initial release

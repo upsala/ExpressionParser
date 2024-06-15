@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.DefaultValueContainer;
 import de.weinzierlstefan.expressionparser.value.Value;
@@ -31,6 +32,15 @@ public class WithExecutor implements Executor {
     childContext.addValueContainer(valueContainer);
 
     return executor.exec(childContext);
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = executor.getExecutorStats();
+    parameterList.forEach((e) -> {
+      executorStats.merge(e.getExecutor().getExecutorStats());
+    });
+    return executorStats;
   }
 
   @Override

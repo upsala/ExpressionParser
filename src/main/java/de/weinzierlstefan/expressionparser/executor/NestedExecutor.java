@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 
@@ -15,6 +16,11 @@ public class NestedExecutor implements Executor {
   @Override
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     return child.exec(ctx);
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    return child.getExecutorStats();
   }
 
   @Override

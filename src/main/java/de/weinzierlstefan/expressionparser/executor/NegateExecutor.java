@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.*;
 
@@ -38,6 +39,11 @@ public class NegateExecutor implements Executor {
         rightValue.getType()
       )
     );
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    return right.getExecutorStats();
   }
 
   @Override

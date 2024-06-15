@@ -1,9 +1,6 @@
 package de.weinzierlstefan.expressionparser.executor;
 
-import de.weinzierlstefan.expressionparser.Executor;
-import de.weinzierlstefan.expressionparser.ExecutorContext;
-import de.weinzierlstefan.expressionparser.ExpressionException;
-import de.weinzierlstefan.expressionparser.Function;
+import de.weinzierlstefan.expressionparser.*;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueList;
 import de.weinzierlstefan.expressionparser.value.ValueNull;
@@ -41,6 +38,14 @@ public class FunctionExecutor implements Executor {
       return ValueNull.INSTANCE;
     }
     return func.execute(valueList, ctx);
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = new ExecutorStats();
+    executorStats.addFunction(name, executorList.size());
+    executorList.stream().map(Executor::getExecutorStats).forEach(executorStats::merge);
+    return executorStats;
   }
 
   @Override

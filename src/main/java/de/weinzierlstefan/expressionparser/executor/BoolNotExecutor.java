@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueBoolean;
@@ -23,6 +24,11 @@ public class BoolNotExecutor implements Executor {
     }
 
     return ValueBoolean.of(!childValue.getBoolean());
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    return child.getExecutorStats();
   }
 
   @Override

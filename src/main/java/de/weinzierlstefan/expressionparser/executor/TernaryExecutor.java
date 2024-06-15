@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 
@@ -28,6 +29,14 @@ public class TernaryExecutor implements Executor {
     } else {
       return exec2.exec(ctx);
     }
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = condition.getExecutorStats();
+    executorStats.merge(exec1.getExecutorStats());
+    executorStats.merge(exec2.getExecutorStats());
+    return executorStats;
   }
 
   @Override

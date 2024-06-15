@@ -61,4 +61,8 @@ public class Expression {
   public String toString() {
     return executor.toString();
   }
+
+  public ExecutorStats getExecutorStats() {
+    return executor.getExecutorStats();
+  }
 }

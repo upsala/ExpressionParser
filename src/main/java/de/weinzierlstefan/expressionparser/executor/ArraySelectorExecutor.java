@@ -3,6 +3,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.*;
 
@@ -112,6 +113,13 @@ public class ArraySelectorExecutor implements Executor {
         parentValue.getType()
       )
     );
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = parent.getExecutorStats();
+    executorList.stream().map(Executor::getExecutorStats).forEach(executorStats::merge);
+    return executorStats;
   }
 
   @Override

@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueInt;
@@ -38,6 +39,11 @@ public class BitNotExecutor implements Executor {
     }
 
     throw new ExpressionException("Value must be a number");
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    return right.getExecutorStats();
   }
 
   @Override

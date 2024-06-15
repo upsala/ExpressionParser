@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
+import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueObject;
@@ -32,5 +33,17 @@ public class ObjectExecutor implements Executor {
     }
 
     return ValueObject.of(valueMap);
+  }
+
+  @Override
+  public ExecutorStats getExecutorStats() {
+    ExecutorStats executorStats = new ExecutorStats();
+    for (Executor executor : executorList) {
+      if (executor instanceof ObjectEntryExecutor objectEntryExecutor) {
+        executorStats.merge(objectEntryExecutor.key().getExecutorStats());
+        executorStats.merge(objectEntryExecutor.value().getExecutorStats());
+      }
+    }
+    return executorStats;
   }
 }

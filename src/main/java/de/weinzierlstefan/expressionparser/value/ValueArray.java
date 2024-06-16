@@ -16,7 +16,7 @@ public class ValueArray extends Value {
     return new ValueArray(value);
   }
 
-  public static ValueArray of(List<Value> valueList) {
+  public static ValueArray of(List<? extends Value> valueList) {
     return new ValueArray(new ValueList(valueList));
   }
 

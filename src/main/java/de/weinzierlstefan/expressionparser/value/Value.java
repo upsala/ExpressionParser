@@ -44,7 +44,7 @@ public abstract class Value implements Comparable<Value> {
       return ValueString.of(s);
     }
 
-    if (source instanceof List l) {
+    if (source instanceof List<?> l) {
       List<Value> array = new ArrayList<>();
       for (var entry : l) {
         array.add(create(entry));
@@ -52,7 +52,7 @@ public abstract class Value implements Comparable<Value> {
       return ValueArray.of(array);
     }
 
-    if (source instanceof Map m) {
+    if (source instanceof Map<?, ?> m) {
       Map<Value, Value> objectMap = new HashMap<>();
       m.forEach((k, v) -> {
         if (objectMap.put(Value.create(k), Value.create(v))!=null) {

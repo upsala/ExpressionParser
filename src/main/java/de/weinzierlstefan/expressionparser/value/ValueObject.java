@@ -1,19 +1,16 @@
 package de.weinzierlstefan.expressionparser.value;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class ValueObject extends Value {
   public final static ValueObject EMPTY = new ValueObject(Map.of());
   private final Map<Value, Value> valueMap;
 
-  private ValueObject(Map<Value, Value> value) {
-    this.valueMap = value;
+  private ValueObject(Map<? extends Value, ? extends Value> value) {
+    this.valueMap = new HashMap<>(value);
   }
 
-  public static ValueObject of(Map<Value, Value> value) {
+  public static ValueObject of(Map<? extends Value, ? extends Value> value) {
     return new ValueObject(value);
   }
 

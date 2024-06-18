@@ -13,7 +13,7 @@ public class TestExecutor {
   @Test
   public void testStats() throws ExpressionException {
     String txt = "(a+b-c*d/e%f)||(1<2>3<=4>=5!=6==7)&&f1()&&f1(1)&&f1(1,2)&&f2(1,2,3)^^WITH(3 AS c, WITH(8 AS a, 9 AS b, 10+b+c))+{11:12}+[13,14,15]+(17<<18>>19)+(16?20:21)";
-    var executorStats = new ExpressionParser().parse(txt).getExecutorStats();
+    var executorStats = ExpressionParser.parse(txt).getExecutorStats();
 
     Set<Value> refConstantSet = new HashSet<>();
     for(int i=1; i<=21; ++i) {

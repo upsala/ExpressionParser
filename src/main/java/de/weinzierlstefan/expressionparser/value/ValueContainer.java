@@ -12,6 +12,8 @@ public abstract class ValueContainer extends Value {
    */
   public abstract Value get(String name);
 
+  public abstract void set(String name, Value value);
+
   /**
    * returns true, if a variable with the name exists
    * @param name

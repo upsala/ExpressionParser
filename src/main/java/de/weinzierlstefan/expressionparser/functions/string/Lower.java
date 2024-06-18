@@ -7,6 +7,8 @@ import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueList;
 import de.weinzierlstefan.expressionparser.value.ValueString;
 
+import java.util.Locale;
+
 /**
  * Returns the string, where all characters are translated to lower-case.
  */
@@ -20,7 +22,12 @@ public class Lower implements Function {
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
     String str = valueList.getString(0);
 
-    return ValueString.of(str.toLowerCase(executorContext.getLocale()));
+    Locale locale = Locale.ROOT;
+    if (executorContext.getOption("locale") instanceof Locale l) {
+      locale = l;
+    }
+
+    return ValueString.of(str.toLowerCase(locale));
   }
 
   @Override

@@ -14,13 +14,15 @@ import de.weinzierlstefan.expressionparser.value.ValueBoolean;
 import de.weinzierlstefan.expressionparser.value.ValueDouble;
 
 /**
- * Creates {@link ExpressionParser} which contains all Functions
+ * A ExecutorContext, where all functions from this library are set
  */
-public class DefaultExpressionParser extends ExpressionParser {
-  /**
-   *
-   */
-  public DefaultExpressionParser() {
+public class DefaultExecutorContext extends ExecutorContext {
+  public DefaultExecutorContext() {
+    init();
+  }
+
+  public DefaultExecutorContext(ExecutorContext parentCtx) {
+    super(parentCtx);
     init();
   }
 
@@ -41,6 +43,8 @@ public class DefaultExpressionParser extends ExpressionParser {
     container.set("pi", ValueDouble.of(Math.PI));
     container.set("e", ValueDouble.of(Math.E));
 
-    addValueContainer(container);
+    setValueContainer(container);
   }
+
+
 }

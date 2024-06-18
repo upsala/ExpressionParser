@@ -1,103 +1,114 @@
 package de.weinzierlstefan.expressionparser;
 
+import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueInt;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCommonFunctions {
+  private Value parse(String expression) {
+    ExecutorContext context = new DefaultExecutorContext();
+    return ExpressionParser.parse(expression, context).eval();
+  }
+
+  private Value parse(String expression, ExecutorContext context) {
+    return ExpressionParser.parse(expression, context).eval();
+  }
+  
   @Test
   public void testBetween() throws ExpressionException {
-    assertEquals("true", new DefaultExpressionParser().parse("between(10,20,30)").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("between(10,0,30)").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("between(10,40,30)").eval().getString());
+    assertEquals("true", parse("between(10,20,30)").getString());
+    assertEquals("false", parse("between(10,0,30)").getString());
+    assertEquals("false", parse("between(10,40,30)").getString());
   }
 
   @Test
   public void testBound() throws ExpressionException {
-    assertEquals("20", new DefaultExpressionParser().parse("bound(10,20,30)").eval().getString());
-    assertEquals("10", new DefaultExpressionParser().parse("bound(10,0,30)").eval().getString());
-    assertEquals("30", new DefaultExpressionParser().parse("bound(10,40,30)").eval().getString());
+    assertEquals("20", parse("bound(10,20,30)").getString());
+    assertEquals("10", parse("bound(10,0,30)").getString());
+    assertEquals("30", parse("bound(10,40,30)").getString());
   }
 
   @Test
   public void testCount() throws ExpressionException {
-    assertEquals(5, new DefaultExpressionParser().parse("count([1,2,3,4,5])").eval().getInt());
-    assertEquals(3, new DefaultExpressionParser().parse("count({1:2,3:4,5:6})").eval().getInt());
-    assertEquals(4, new DefaultExpressionParser().parse("count('test')").eval().getInt());
-    assertEquals(0, new DefaultExpressionParser().parse("count(null)").eval().getInt());
-    assertEquals(1, new DefaultExpressionParser().parse("count(5)").eval().getInt());
-    assertEquals(1, new DefaultExpressionParser().parse("count(5.0)").eval().getInt());
+    assertEquals(5, parse("count([1,2,3,4,5])").getInt());
+    assertEquals(3, parse("count({1:2,3:4,5:6})").getInt());
+    assertEquals(4, parse("count('test')").getInt());
+    assertEquals(0, parse("count(null)").getInt());
+    assertEquals(1, parse("count(5)").getInt());
+    assertEquals(1, parse("count(5.0)").getInt());
   }
 
   @Test
   public void testIfNull() throws ExpressionException {
-    assertEquals("[1,2,3]", new DefaultExpressionParser().parse("ifnull([1,2,3])").eval().getString());
-    assertEquals("123", new DefaultExpressionParser().parse("ifnull(123)").eval().getString());
-    //assertEquals("false", new DefaultExpressionParser().parse("ifnull(object())").eval().getString());
-    assertEquals("abc", new DefaultExpressionParser().parse("ifnull('abc')").eval().getString());
-    assertEquals("1", new DefaultExpressionParser().parse("ifnull(null,1)").eval().getString());
-    assertEquals("1", new DefaultExpressionParser().parse("ifnull(null,null,1)").eval().getString());
-    assertEquals("1", new DefaultExpressionParser().parse("ifnull(null,null,null,1)").eval().getString());
+    assertEquals("[1,2,3]", parse("ifnull([1,2,3])").getString());
+    assertEquals("123", parse("ifnull(123)").getString());
+    //assertEquals("false", parse("ifnull(object())").getString());
+    assertEquals("abc", parse("ifnull('abc')").getString());
+    assertEquals("1", parse("ifnull(null,1)").getString());
+    assertEquals("1", parse("ifnull(null,null,1)").getString());
+    assertEquals("1", parse("ifnull(null,null,null,1)").getString());
   }
 
   @Test
   public void testIsArray() throws ExpressionException {
-    assertEquals("true", new DefaultExpressionParser().parse("isarray(array(1,2,3))").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isarray(123)").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isarray('abc')").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isarray(null)").eval().getString());
+    assertEquals("true", parse("isarray(array(1,2,3))").getString());
+    assertEquals("false", parse("isarray(123)").getString());
+    assertEquals("false", parse("isarray('abc')").getString());
+    assertEquals("false", parse("isarray(null)").getString());
   }
 
   @Test
   public void testIsNull() throws ExpressionException {
-    assertEquals("true", new DefaultExpressionParser().parse("isnull(null)").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isnull(array(1,2,3))").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isnull(123)").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isnull('abc')").eval().getString());
+    assertEquals("true", parse("isnull(null)").getString());
+    assertEquals("false", parse("isnull(array(1,2,3))").getString());
+    assertEquals("false", parse("isnull(123)").getString());
+    assertEquals("false", parse("isnull('abc')").getString());
   }
 
   @Test
   public void testIsNumber() throws ExpressionException {
-    assertEquals("false", new DefaultExpressionParser().parse("isnumber(array(1,2,3))").eval().getString());
-    assertEquals("true", new DefaultExpressionParser().parse("isnumber(123)").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isnumber('abc')").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isnumber(null)").eval().getString());
+    assertEquals("false", parse("isnumber(array(1,2,3))").getString());
+    assertEquals("true", parse("isnumber(123)").getString());
+    assertEquals("false", parse("isnumber('abc')").getString());
+    assertEquals("false", parse("isnumber(null)").getString());
   }
 
   @Test
   public void testIsString() throws ExpressionException {
-    assertEquals("false", new DefaultExpressionParser().parse("isstring(array(1,2,3))").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isstring(123)").eval().getString());
-    assertEquals("true", new DefaultExpressionParser().parse("isstring('abc')").eval().getString());
-    assertEquals("false", new DefaultExpressionParser().parse("isstring(null)").eval().getString());
+    assertEquals("false", parse("isstring(array(1,2,3))").getString());
+    assertEquals("false", parse("isstring(123)").getString());
+    assertEquals("true", parse("isstring('abc')").getString());
+    assertEquals("false", parse("isstring(null)").getString());
   }
 
   @Test
   public void testMax() throws ExpressionException {
-    assertEquals("3", new DefaultExpressionParser().parse("max(1,2,3)").eval().getString());
-    assertEquals("c", new DefaultExpressionParser().parse("max('a','b','c')").eval().getString());
-    assertEquals("3", new DefaultExpressionParser().parse("max(1,2,3,NULL)").eval().getString());
+    assertEquals("3", parse("max(1,2,3)").getString());
+    assertEquals("c", parse("max('a','b','c')").getString());
+    assertEquals("3", parse("max(1,2,3,NULL)").getString());
   }
 
   @Test
   public void testMin() throws ExpressionException {
-    assertEquals("1", new DefaultExpressionParser().parse("min(1,2,3)").eval().getString());
-    assertEquals("a", new DefaultExpressionParser().parse("min('a','b','c')").eval().getString());
-    assertEquals("1", new DefaultExpressionParser().parse("min(1,2,3,NULL)").eval().getString());
+    assertEquals("1", parse("min(1,2,3)").getString());
+    assertEquals("a", parse("min('a','b','c')").getString());
+    assertEquals("1", parse("min(1,2,3,NULL)").getString());
   }
 
   @Test
   public void testVarExists() throws ExpressionException {
-    ExpressionParser expressionParser = new DefaultExpressionParser();
-    expressionParser.setVariable("abc", ValueInt.of(2));
-    expressionParser.setVariable("a1", ValueInt.of(3));
-    expressionParser.setVariable("a2", ValueInt.of(4));
+    ExecutorContext ctx = new DefaultExecutorContext();
 
-    assertEquals(true, expressionParser.parse("varexists('abc')").eval().getBoolean());
-    assertEquals(false, expressionParser.parse("varexists('a')").eval().getBoolean());
-    assertEquals(true, expressionParser.parse("varexists('abc','a1','a2')").eval().getBoolean());
-    assertEquals(false, expressionParser.parse("varexists('abc','a1','a2','b1')").eval().getBoolean());
+    ctx.setVariable("abc", ValueInt.of(2));
+    ctx.setVariable("a1", ValueInt.of(3));
+    ctx.setVariable("a2", ValueInt.of(4));
+
+    assertEquals(true, parse("varexists('abc')", ctx).getBoolean());
+    assertEquals(false, parse("varexists('a')", ctx).getBoolean());
+    assertEquals(true, parse("varexists('abc','a1','a2')", ctx).getBoolean());
+    assertEquals(false, parse("varexists('abc','a1','a2','b1')", ctx).getBoolean());
   }
 }
 

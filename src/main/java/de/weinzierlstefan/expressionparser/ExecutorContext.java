@@ -1,31 +1,44 @@
 package de.weinzierlstefan.expressionparser;
 
+import de.weinzierlstefan.expressionparser.value.DefaultValueContainer;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueContainer;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A context-class for the {@link Executor}, which holds a map of functions and all variables,
  * which are needed during exalution of a {@link Expression}
  */
 public class ExecutorContext {
-  private final List<ValueContainer> valueContainerList = new ArrayList<>();
+  private final static AtomicReference<ExecutorContext> defaultExecutorContext = new AtomicReference<>(new ExecutorContext());
+  private final ExecutorContext parentContext;
+  private ValueContainer valueContainer = new DefaultValueContainer();
   private Map<String, Function> functionMap = new HashMap<>();
-  private Locale locale = Locale.getDefault();
+  private Map<String, Object> optionMap = new HashMap<>();
 
   public ExecutorContext() {
+    parentContext = null;
   }
 
   /**
    * Constructs a copy of an other {@link ExecutorContext}
    *
-   * @param otherCtx
+   * @param parentCtx
    */
-  public ExecutorContext(ExecutorContext otherCtx) {
-    this.valueContainerList.addAll(otherCtx.valueContainerList);
-    this.functionMap = new HashMap<>(otherCtx.functionMap);
-    this.locale = otherCtx.getLocale();
+  public ExecutorContext(ExecutorContext parentCtx) {
+    this.parentContext = parentCtx;
+  }
+
+  public static ExecutorContext getDefault() {
+    return defaultExecutorContext.get();
+  }
+
+  public static void setDefault(ExecutorContext defaultExecutorContext) {
+    ExecutorContext.defaultExecutorContext.set(defaultExecutorContext);
   }
 
   /**
@@ -35,14 +48,13 @@ public class ExecutorContext {
    * @return value or null
    */
   public Value getVariable(String name) {
-    for (int i = valueContainerList.size() - 1; i >= 0; i--) {
-      Value value = valueContainerList.get(i).get(name);
-      if (value != null) {
-        return value;
-      }
+    var value = valueContainer.get(name);
+
+    if (value == null && parentContext != null) {
+      value = parentContext.getVariable(name);
     }
 
-    return null;
+    return value;
   }
 
   /**
@@ -52,7 +64,11 @@ public class ExecutorContext {
    * @return {@link Function} or null
    */
   public Function getFunction(String name) {
-    return functionMap.get(name);
+    Function function = functionMap.get(name);
+    if (function == null && parentContext != null) {
+      function = parentContext.getFunction(name);
+    }
+    return function;
   }
 
   /**
@@ -65,21 +81,19 @@ public class ExecutorContext {
   }
 
   /**
+   * @param functions
+   */
+  public void addFunctions(Collection<Function> functions) {
+    functions.forEach(this::addFunction);
+  }
+
+  /**
    * Adds a {@link ValueContainer} to the list
    *
    * @param valueContainer
    */
-  public void addValueContainer(ValueContainer valueContainer) {
-    valueContainerList.add(valueContainer);
-  }
-
-  /**
-   * Adds a collection of {@link ValueContainer} to the list
-   *
-   * @param valueContainerList
-   */
-  public void addValueContainers(Collection<ValueContainer> valueContainerList) {
-    this.valueContainerList.addAll(valueContainerList);
+  public void setValueContainer(ValueContainer valueContainer) {
+    this.valueContainer = valueContainer;
   }
 
   /**
@@ -92,36 +106,41 @@ public class ExecutorContext {
   }
 
   /**
-   * Retrieves the current set {@link Locale} which is used for different string-functions
-   *
-   * @return
-   */
-  public Locale getLocale() {
-    return locale;
-  }
-
-  /**
-   * Sets a {@link Locale} for different String-Functions
-   *
-   * @param locale
-   */
-  public void setLocale(Locale locale) {
-    this.locale = locale;
-  }
-
-  /**
    * Checks if a given variable exists in the internal lists
    *
    * @param name
    * @return true, if a variable with the given name is found
    */
   public boolean hasVariable(String name) {
-    for (int i = valueContainerList.size() - 1; i >= 0; i--) {
-      if (valueContainerList.get(i).has(name)) {
-        return true;
-      }
+    var has = valueContainer.has(name);
+    if (!has && parentContext != null) {
+      has = parentContext.hasVariable(name);
     }
 
-    return false;
+    return has;
+  }
+
+  public Object getOption(String name) {
+    Object option = optionMap.get(name);
+    if (option == null && parentContext != null) {
+      option = parentContext.getOption(name);
+    }
+    return option;
+  }
+
+  public void setOption(String name, Object value) {
+    optionMap.put(name, value);
+  }
+
+  public ExecutorContext getParentContext() {
+    return parentContext;
+  }
+
+  public void setVariable(String name, Value value) {
+    valueContainer.set(name, value);
+  }
+
+  public void setVariable(String name, Object value) {
+    valueContainer.set(name, Value.create(value));
   }
 }

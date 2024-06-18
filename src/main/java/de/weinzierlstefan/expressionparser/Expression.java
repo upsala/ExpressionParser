@@ -1,21 +1,25 @@
 package de.weinzierlstefan.expressionparser;
 
-import de.weinzierlstefan.expressionparser.value.DefaultValueContainer;
 import de.weinzierlstefan.expressionparser.value.Value;
-import de.weinzierlstefan.expressionparser.value.ValueContainer;
 
 /**
  *
  */
 public class Expression {
   private final Executor executor;
-  private final ExecutorContext executorContext;
-  private final DefaultValueContainer defaultValueContainer = new DefaultValueContainer();
+  private ExecutorContext executorContext;
 
-  Expression(Executor executor, ExecutorContext ctx) {
+  Expression(Executor executor, ExecutorContext executorContext) {
     this.executor = executor;
-    this.executorContext = new ExecutorContext(ctx);
-    this.executorContext.addValueContainer(defaultValueContainer);
+    this.executorContext = executorContext;
+  }
+
+  /**
+   * Sets a {@link ExecutorContext}, so it must not be used in eval.
+   * @param executorContext
+   */
+  public void setExecutorContext(ExecutorContext executorContext) {
+    this.executorContext = executorContext;
   }
 
   /**
@@ -25,36 +29,23 @@ public class Expression {
    * @throws ExpressionException
    */
   public Value eval() throws ExpressionException {
-    return executor.exec(executorContext);
+    return eval(null);
   }
 
   /**
-   * Evaluates the expression and returns a {@link Value}
+   * Evaluates the expression and returns a {@link Value}, but uses the given {@link ExecutorContext} instead of the previous set context
    *
    * @return Value
    * @throws ExpressionException
    */
   public Value eval(ExecutorContext ctx) throws ExpressionException {
+    if (ctx==null) {
+      ctx = executorContext;
+    }
+    if (ctx==null) {
+      ctx = ExecutorContext.getDefault();
+    }
     return executor.exec(ctx);
-  }
-
-  /**
-   * Adds a {@link Value} as variable, which has a higher priority than the Variables from the {@link ExpressionParser}
-   *
-   * @param name
-   * @param value
-   */
-  public void setVariable(String name, Value value) {
-    defaultValueContainer.set(name, value);
-  }
-
-  /**
-   * Adds a {@link ValueContainer}, which has a higher priority than the {@link ValueContainer} from the {@link ExpressionParser}
-   *
-   * @param valueContainer
-   */
-  public void addValueContainer(ValueContainer valueContainer) {
-    executorContext.addValueContainer(valueContainer);
   }
 
   @Override
@@ -62,6 +53,10 @@ public class Expression {
     return executor.toString();
   }
 
+  /**
+   * Returns {@link ExecutorStats} for this expression
+   * @return
+   */
   public ExecutorStats getExecutorStats() {
     return executor.getExecutorStats();
   }

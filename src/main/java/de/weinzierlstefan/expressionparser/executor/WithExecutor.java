@@ -22,14 +22,11 @@ public class WithExecutor implements Executor {
   @Override
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     ExecutorContext childContext = new ExecutorContext(ctx);
-    DefaultValueContainer valueContainer = new DefaultValueContainer();
 
     parameterList.forEach((e) -> {
       Value value = e.getExecutor().exec(ctx);
-      valueContainer.set(e.getId(), value);
+      childContext.setVariable(e.getId(), value);
     });
-
-    childContext.addValueContainer(valueContainer);
 
     return executor.exec(childContext);
   }

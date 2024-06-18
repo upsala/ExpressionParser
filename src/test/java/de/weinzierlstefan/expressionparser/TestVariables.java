@@ -1,38 +1,43 @@
 package de.weinzierlstefan.expressionparser;
 
 import de.weinzierlstefan.expressionparser.value.DefaultValueContainer;
+import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueInt;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestVariables {
+  private Value parse(String expression, ExecutorContext context) {
+    return ExpressionParser.parse(expression, context).eval();
+  }
+
   @Test
   public void testVars() throws ExpressionException {
-    ExpressionParser expressionParser = new ExpressionParser();
-    expressionParser.setVariable("a", ValueInt.of(2));
-    assertEquals("2", expressionParser.parse("a").eval().toString());
+    ExecutorContext ctx = new ExecutorContext();
+    ctx.setVariable("a", ValueInt.of(2));
+    assertEquals("2", parse("a", ctx).toString());
 
-    expressionParser = new ExpressionParser();
-    expressionParser.setVariable("a", ValueInt.of(2));
-    expressionParser.setVariable("b", ValueInt.of(3));
-    assertEquals("5", expressionParser.parse("a+b").eval().toString());
+    ctx = new ExecutorContext();
+    ctx.setVariable("a", ValueInt.of(2));
+    ctx.setVariable("b", ValueInt.of(3));
+    assertEquals("5", parse("a+b", ctx).toString());
 
-    expressionParser = new ExpressionParser();
-    expressionParser.setVariable("_a", ValueInt.of(2));
-    assertEquals("2", expressionParser.parse("_a").eval().toString());
+    ctx = new ExecutorContext();
+    ctx.setVariable("_a", ValueInt.of(2));
+    assertEquals("2", parse("_a", ctx).toString());
 
-    expressionParser = new ExpressionParser();
-    expressionParser.setVariable("longvariablename", ValueInt.of(2));
-    assertEquals("2", expressionParser.parse("longvariablename").eval().toString());
+    ctx = new ExecutorContext();
+    ctx.setVariable("longvariablename", ValueInt.of(2));
+    assertEquals("2", parse("longvariablename", ctx).toString());
 
-    expressionParser = new ExpressionParser();
-    expressionParser.setVariable("var123456789", ValueInt.of(2));
-    assertEquals("2", expressionParser.parse("var123456789").eval().toString());
+    ctx = new ExecutorContext();
+    ctx.setVariable("var123456789", ValueInt.of(2));
+    assertEquals("2", parse("var123456789", ctx).toString());
 
-    expressionParser = new ExpressionParser();
-    expressionParser.setVariable("var_12345_6789", ValueInt.of(2));
-    assertEquals("2", expressionParser.parse("var_12345_6789").eval().toString());
+    ctx = new ExecutorContext();
+    ctx.setVariable("var_12345_6789", ValueInt.of(2));
+    assertEquals("2", parse("var_12345_6789", ctx).toString());
   }
 
   @Test
@@ -42,15 +47,16 @@ public class TestVariables {
 
   @Test
   public void testOverwriting() throws ExpressionException {
-    ExpressionParser parser = new ExpressionParser();
-    parser.setVariable("a", ValueInt.of(1));
-    parser.setVariable("a", ValueInt.of(2));
-    assertEquals("2", parser.parse("a").eval().toString());
+    ExecutorContext ctx = new ExecutorContext();
 
-    parser = new ExpressionParser();
-    parser.setVariable("a", ValueInt.of(1));
-    Expression expression = parser.parse("a");
-    expression.setVariable("a", ValueInt.of(2));
+    ctx.setVariable("a", ValueInt.of(1));
+    ctx.setVariable("a", ValueInt.of(2));
+    assertEquals("2", parse("a", ctx).toString());
+
+    ctx = new ExecutorContext();
+    ctx.setVariable("a", ValueInt.of(1));
+    Expression expression = ExpressionParser.parse("a", ctx);
+    ctx.setVariable("a", ValueInt.of(2));
     assertEquals("2", expression.eval().toString());
   }
 
@@ -59,17 +65,17 @@ public class TestVariables {
     DefaultValueContainer defaultVariableContainer = new DefaultValueContainer();
     defaultVariableContainer.set("a", ValueInt.of(1));
 
-    ExpressionParser expressionParser = new ExpressionParser();
-    expressionParser.addValueContainer(defaultVariableContainer);
+    ExecutorContext ctx = new ExecutorContext();
+    ctx.setValueContainer(defaultVariableContainer);
 
-    assertEquals("1", expressionParser.parse("a").eval().toString());
+    assertEquals("1", parse("a", ctx).toString());
   }
 
   @Test
   public void testMissing() throws ExpressionException {
     String err = null;
     try {
-      new ExpressionParser().parse("a==1").eval().toString();
+      ExpressionParser.parse("a==1").eval().toString();
     } catch (ExpressionException ex) {
       err = ex.getMessage();
     }

@@ -5,6 +5,9 @@ import de.weinzierlstefan.expressionparser.value.Value;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This class gives an overview, of the used Variables, Constants and Functions which are used in a {@link Expression}
+ */
 public class ExecutorStats {
   private final Set<String> variableSet = new HashSet<>();
   private final Set<Value> constantSet = new HashSet<>();

@@ -15,27 +15,22 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.*;
 
 /**
- * 
+ * This class is used, to parse a expression, cache it and return a {@link Expression} which can evaluated
  */
 public class ExpressionParser {
   private final static int DEFAULT_MAX_CACHE_SIZE = 100;
   private final static LRUCache<String, Executor> executorCache = new LRUCache<>(DEFAULT_MAX_CACHE_SIZE);
-  private final Map<String, Function> functionMap = new HashMap<>();
-  private final DefaultValueContainer defaultValueHolder = new DefaultValueContainer();
-  private final List<ValueContainer> valueContainerList = new ArrayList<>();
 
-  public ExpressionParser() {
-    valueContainerList.add(defaultValueHolder);
+  private ExpressionParser() {
   }
 
   /**
-   * Parses the provided expression and returns {@link Expression}
-   *
+   * Parses the provided expression and returns {@link Expression}, where the {@link ExecutorContext} is set
    * @param expr
    * @return
    * @throws ExpressionException
    */
-  public Expression parse(String expr) throws ExpressionException {
+  public static Expression parse(String expr, ExecutorContext executorContext) throws ExpressionException {
     Executor executor = executorCache.get(expr);
     if (executor == null) {
       CharStream chars = CharStreams.fromString(expr);
@@ -51,82 +46,24 @@ public class ExpressionParser {
     }
     executorCache.put(expr, executor);
 
-    ExecutorContext ctx = new ExecutorContext();
-    ctx.addValueContainers(valueContainerList);
-    ctx.setFunctionMap(functionMap);
-
-    return new Expression(executor, ctx);
+    return new Expression(executor, executorContext);
   }
 
   /**
-   * Adds a new function to this parser
-   *
-   * @param function
-   */
-  public void addFunction(Function function) {
-    functionMap.put(function.getName().toLowerCase(), function);
-  }
-
-  /**
-   * Convenient function for setting many functions at once
-   *
-   * @param functions
-   */
-  public void addFunctions(Collection<Function> functions) {
-    functions.forEach(this::addFunction);
-  }
-
-  /**
-   * Sets the value of a variable
-   *
-   * @param name
-   * @param value
-   */
-  public void setVariable(String name, Value value) {
-    defaultValueHolder.set(name, value);
-  }
-
-  /**
-   * Sets the value of a variable
-   *
-   * @param name
-   * @param value
-   */
-  public void setVariable(String name, Object value) {
-    defaultValueHolder.set(name, value);
-  }
-
-  /**
-   * Adds a {@link ValueContainer}
-   *
-   * @param valueContainer
-   */
-  public void addValueContainer(ValueContainer valueContainer) {
-    valueContainerList.add(valueContainer);
-  }
-
-  /**
-   * Gets the value of a variable
-   *
-   * @param name
+   * Parses the provided expression and returns {@link Expression}
+   * @param expr
    * @return
+   * @throws ExpressionException
    */
-  public Value getVariable(String name) {
-    for (int i = valueContainerList.size() - 1; i >= 0; i--) {
-      Value value = valueContainerList.get(i).get(name);
-      if (value != null) {
-        return value;
-      }
-    }
-
-    return null;
+  public static Expression parse(String expr) throws ExpressionException {
+    return parse(expr, null);
   }
 
   /**
    * Sets the size, of the internal (Thread-save) cache
    * @param size
    */
-  private void setCacheSize(int size) {
+  public static void setCacheSize(int size) {
     executorCache.setCacheSize(size);
   }
 }

@@ -31,13 +31,12 @@ Key Features:
 ```java
 //as one-liner
 public static void test1() {
-  System.out.println(new ExpressionParser().parse("1+2+3").eval()); //6
+  System.out.println(ExpressionParser.parse("1+2+3").eval()); //6
 }
 
 //or with custom variables
 public static void test2() {
-  ExpressionParser parser = new ExpressionParser();
-  Expression expr = parser.parse("3*a");
+  Expression expr = ExpressionParser.parse("3*a");
   expr.setVariable("a", Value.create(5));
   Value result = expr.eval();
 
@@ -46,8 +45,8 @@ public static void test2() {
 
 //or with all possible functions set
 public static void test3() {
-  ExpressionParser parser = new DefaultExpressionParser();
-  Expression expr = parser.parse("arraycount([1,2,'test'])");
+  var ctx = new DefaultExecutorContext();
+  Expression expr = ExpressionParser.parse("arraycount([1,2,'test'])", ctx);
   Value result = expr.eval();
 
   System.out.println(result); //3
@@ -66,6 +65,9 @@ public static void test3() {
 Apache V2.0
 
 ### Changelog
+#### Version 1.1.0
+- Refactoring of the ExecutorContext. Now functions must not be know at parsing-time.
+
 #### Version 1.0.1
 - Introduced ExecutorStats
 

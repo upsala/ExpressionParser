@@ -5,6 +5,7 @@ import de.weinzierlstefan.expressionparser.ExecutorContext;
 import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 
 /**
  *
@@ -26,6 +27,8 @@ public class BoolAndExecutor implements Executor {
   @Override
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value leftValue = left.exec(ctx);
+
+    leftValue = ValueLambda.flat(leftValue, ctx);
 
     if (!leftValue.getBoolean()) {
       return leftValue;

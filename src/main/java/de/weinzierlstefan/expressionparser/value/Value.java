@@ -235,4 +235,8 @@ public abstract class Value implements Comparable<Value> {
   public int compareTo(Value o) {
     return ValueComparator.compare(this, o);
   }
+
+  public boolean isLambda() {
+    return false;
+  }
 }

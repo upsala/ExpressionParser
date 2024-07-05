@@ -2,6 +2,7 @@ package de.weinzierlstefan.expressionparser.executor;
 
 import de.weinzierlstefan.expressionparser.*;
 import de.weinzierlstefan.expressionparser.value.Value;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 import de.weinzierlstefan.expressionparser.value.ValueList;
 import de.weinzierlstefan.expressionparser.value.ValueNull;
 
@@ -37,6 +38,14 @@ public class FunctionExecutor implements Executor {
     if (func.returnsNullOnNull() && valueList.anyNull()) {
       return ValueNull.INSTANCE;
     }
+
+    if (!func.canHandleLambda() && valueList.anyLambda()) {
+      valueList = valueList
+        .stream()
+        .map((v)->ValueLambda.flat(v, ctx))
+        .collect(Collectors.toCollection(ValueList::new));
+    }
+
     return func.execute(valueList, ctx);
   }
 

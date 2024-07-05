@@ -5,6 +5,7 @@ import de.weinzierlstefan.expressionparser.ExecutorContext;
 import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 import de.weinzierlstefan.expressionparser.value.ValueObject;
 
 import java.util.HashMap;
@@ -26,7 +27,10 @@ public class ObjectExecutor implements Executor {
       if (executor instanceof ObjectEntryExecutor objectEntryExecutor) {
         Value key = objectEntryExecutor.key().exec(ctx);
         Value value = objectEntryExecutor.value().exec(ctx);
-        valueMap.put(key, value);
+        valueMap.put(
+          ValueLambda.flat(key, ctx),
+          ValueLambda.flat(value, ctx)
+        );
       } else {
         throw new ExpressionException("Object executor does not implement " + executor.getClass().getName());
       }

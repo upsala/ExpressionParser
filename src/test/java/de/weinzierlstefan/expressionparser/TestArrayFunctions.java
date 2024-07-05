@@ -146,4 +146,49 @@ public class TestArrayFunctions {
     assertEquals("[1,2,3,4,5]", parse("arrayunion([1,2,3],[3,4,5])").getString());
   }
 
+  @Test
+  public void testArrayFilter() throws ExpressionException {
+    assertEquals("[4,5]", parse("arrayfilter([1,2,3,4,5], (v)->v>3)").getString());
+    assertEquals("[3,4,5]", parse("arrayfilter([1,2,3,4,5], (v,i)->i>1)").getString());
+  }
+
+  @Test
+  public void testArrayFind() throws ExpressionException {
+    assertEquals("4", parse("arrayfind([1,2,3,4,5], (v)->v>3)").getString());
+    assertEquals("2", parse("arrayfind([1,2,3,4,5], (v,i)->i==1)").getString());
+  }
+
+  @Test
+  public void testArrayFindLast() throws ExpressionException {
+    assertEquals("5", parse("arrayfindlast([1,2,3,4,5], (v)->v>3)").getString());
+    assertEquals("2", parse("arrayfindlast([1,2,3,4,5], (v,i)->i==1)").getString());
+  }
+
+  @Test
+  public void testArrayMap() throws ExpressionException {
+    assertEquals("[2,4,6,8,10]", parse("arraymap([1,2,3,4,5], (v)->v*2)").getString());
+    assertEquals("[0,2,6,12,20]", parse("arraymap([1,2,3,4,5], (v,i)->v*i)").getString());
+  }
+
+  @Test
+  public void testArrayReduce() throws ExpressionException {
+    assertEquals("6", parse("arrayreduce([1,2,3],(a,v)->a+v,0)").getString());
+    assertEquals("9", parse("arrayreduce([1,2,3],(a,v,i)->a+v+i,0)").getString());
+  }
+
+  @Test
+  public void testArraySample() throws ExpressionException {
+    assertEquals("[1,2,3,4,5]", parse("arraysample([1,2,3,4,5], 5)").getString());
+    assertEquals("[1,2,3,4,5]", parse("arraysample([1,2,3,4,5], 10)").getString());
+    assertEquals(3, parse("arraysample([1,2,3,4,5], 3)").getArray().size());
+    assertEquals(0, parse("arraysample([1,2,3,4,5], 0)").getArray().size());
+  }
+
+  @Test
+  public void testArrayCall() throws ExpressionException {
+    assertEquals("15", parse("arraycall([1,2,3,4,5], (a,b,c,d,e)->a+b+c+d+e)").getString());
+    assertEquals("1", parse("arraycall([1,2,3,4,5], (a)->a)").getString());
+    assertEquals("true", parse("arraycall([1,2], (a,b,c,d,e)->isnull(c,d,e))").getString());
+  }
+
 }

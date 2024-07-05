@@ -215,4 +215,12 @@ public class TestToString {
   public void testCombined() {
     assertEquals("1+2*3-4/5%6**7>>8<<9|1&2^3&&4||5^^6?7:8<9>1>=2<=3==4<>5+WITH(1 AS a, 2 AS b, a+b)*(3+4)", parse("1+2*3-4/5%6**7>>8<<9|1&2^3&&4||5^^6?7:8<9>1>=2<=3==4<>5+with(1 as a, 2 as b, a+b)*(3+4)").toString());
   }
+
+  @Test
+  public void testLambda() throws ExpressionException {
+    assertEquals("()->1", parse("()->1").toString());
+    assertEquals("(a)->a", parse("(a)->a").toString());
+    assertEquals("(a)->a+1", parse("(a)->a+1").toString());
+    assertEquals("(a,b)->a+b", parse("(a,b)->a+b").toString());
+  }
 }

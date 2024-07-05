@@ -87,6 +87,13 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSingleQuoteString(ParserParser.SingleQuoteStringContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code Lambda}
+	 * labeled alternative in {@link ParserParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambda(ParserParser.LambdaContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Parentheses}
 	 * labeled alternative in {@link ParserParser#expression}.
 	 * @param ctx the parse tree
@@ -212,6 +219,12 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPower(ParserParser.PowerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserParser#lambdaParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambdaParameter(ParserParser.LambdaParameterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserParser#objectEntry}.
 	 * @param ctx the parse tree

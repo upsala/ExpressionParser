@@ -138,6 +138,18 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitSingleQuoteString(ParserParser.SingleQuoteStringContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code Lambda}
+	 * labeled alternative in {@link ParserParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterLambda(ParserParser.LambdaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Lambda}
+	 * labeled alternative in {@link ParserParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitLambda(ParserParser.LambdaContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Parentheses}
 	 * labeled alternative in {@link ParserParser#expression}.
 	 * @param ctx the parse tree
@@ -353,6 +365,16 @@ public interface ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPower(ParserParser.PowerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserParser#lambdaParameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterLambdaParameter(ParserParser.LambdaParameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserParser#lambdaParameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitLambdaParameter(ParserParser.LambdaParameterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ParserParser#objectEntry}.
 	 * @param ctx the parse tree

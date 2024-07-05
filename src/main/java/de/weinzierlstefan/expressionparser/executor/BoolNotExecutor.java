@@ -6,6 +6,7 @@ import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueBoolean;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 import de.weinzierlstefan.expressionparser.value.ValueNull;
 
 public class BoolNotExecutor implements Executor {
@@ -18,6 +19,8 @@ public class BoolNotExecutor implements Executor {
   @Override
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value childValue = child.exec(ctx);
+
+    childValue = ValueLambda.flat(childValue, ctx);
 
     if (childValue.isNull()) {
       return ValueNull.INSTANCE;

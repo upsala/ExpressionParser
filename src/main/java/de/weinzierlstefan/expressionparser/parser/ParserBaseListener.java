@@ -149,6 +149,18 @@ public class ParserBaseListener implements ParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLambda(ParserParser.LambdaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLambda(ParserParser.LambdaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParentheses(ParserParser.ParenthesesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -360,6 +372,18 @@ public class ParserBaseListener implements ParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPower(ParserParser.PowerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLambdaParameter(ParserParser.LambdaParameterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLambdaParameter(ParserParser.LambdaParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

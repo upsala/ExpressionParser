@@ -4,10 +4,7 @@ import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
 import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
-import de.weinzierlstefan.expressionparser.value.Value;
-import de.weinzierlstefan.expressionparser.value.ValueInt;
-import de.weinzierlstefan.expressionparser.value.ValueLong;
-import de.weinzierlstefan.expressionparser.value.ValueNull;
+import de.weinzierlstefan.expressionparser.value.*;
 
 /**
  *
@@ -26,6 +23,8 @@ public class BitNotExecutor implements Executor {
   @Override
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value rightValue = right.exec(ctx);
+
+    rightValue = ValueLambda.flat(rightValue, ctx);
 
     if (rightValue.isNull()) {
       return ValueNull.INSTANCE;

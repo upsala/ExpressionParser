@@ -20,6 +20,9 @@ public class DivExecutor implements Executor {
     Value leftValue = left.exec(ctx);
     Value rightValue = right.exec(ctx);
 
+    leftValue = ValueLambda.flat(leftValue, ctx);
+    rightValue = ValueLambda.flat(rightValue, ctx);
+
     if (leftValue.isNull() || rightValue.isNull()) {
       return ValueNull.INSTANCE;
     }

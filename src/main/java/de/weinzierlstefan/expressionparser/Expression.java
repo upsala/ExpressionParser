@@ -1,6 +1,8 @@
 package de.weinzierlstefan.expressionparser;
 
 import de.weinzierlstefan.expressionparser.value.Value;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
+import de.weinzierlstefan.expressionparser.value.ValueList;
 
 /**
  *
@@ -45,7 +47,9 @@ public class Expression {
     if (ctx==null) {
       ctx = ExecutorContext.getDefault();
     }
-    return executor.exec(ctx);
+
+    var result = executor.exec(ctx);
+    return ValueLambda.flat(result, ctx);
   }
 
   @Override

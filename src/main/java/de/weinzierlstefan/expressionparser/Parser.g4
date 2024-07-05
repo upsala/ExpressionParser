@@ -33,6 +33,11 @@ expression
 		| left=expression operator=(BIT_AND|BIT_OR|BIT_XOR) right=expression											# BitOperations
 		| condition=expression QMARK ( choice1=expression )? COLON choice2=expression							# Ternary
 		| left=expression operator=(BOOL_AND|BOOL_OR|BOOL_XOR) right=expression										# Bool
+		| LPARENT variables=lambdaParameter? RPARENT LAMBDA_ARROW expr=expression                 # Lambda
+		;
+
+lambdaParameter
+		: Identifier ( COMMA Identifier )*
 		;
 
 objectEntry
@@ -162,6 +167,7 @@ SHIFT_LEFT: '<<';
 SHIFT_RIGHT: '>>';
 EXCLMATION_MARK: '!';
 ARRAY_RANGE: '..';
+LAMBDA_ARROW: '->';
 
 fragment Digit
 		: [0-9]

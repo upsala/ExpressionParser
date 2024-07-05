@@ -7,6 +7,7 @@ import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueBoolean;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 import de.weinzierlstefan.expressionparser.value.ValueNull;
 
 public class CompLEExecutor implements Executor {
@@ -22,6 +23,9 @@ public class CompLEExecutor implements Executor {
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value valueLeft = left.exec(ctx);
     Value valueRight = right.exec(ctx);
+
+    valueLeft = ValueLambda.flat(valueLeft, ctx);
+    valueRight = ValueLambda.flat(valueRight, ctx);
 
     if (valueLeft.isNull() || valueRight.isNull()) {
       return ValueNull.INSTANCE;

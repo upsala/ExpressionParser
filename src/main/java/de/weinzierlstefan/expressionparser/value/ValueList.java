@@ -248,5 +248,14 @@ public class ValueList extends ArrayList<Value> {
     return get(index).isObject();
   }
 
+  public boolean isLambda(int index) {
+    if (index >= 0 && index < size()) {
+      return get(index).isLambda();
+    }
+    return false;
+  }
 
+  public boolean anyLambda() {
+    return stream().anyMatch(Value::isLambda);
+  }
 }

@@ -4,10 +4,7 @@ import de.weinzierlstefan.expressionparser.Executor;
 import de.weinzierlstefan.expressionparser.ExecutorContext;
 import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
-import de.weinzierlstefan.expressionparser.value.Value;
-import de.weinzierlstefan.expressionparser.value.ValueInt;
-import de.weinzierlstefan.expressionparser.value.ValueLong;
-import de.weinzierlstefan.expressionparser.value.ValueNull;
+import de.weinzierlstefan.expressionparser.value.*;
 
 public class ShiftRightExecutor implements Executor {
   private final Executor left;
@@ -22,6 +19,9 @@ public class ShiftRightExecutor implements Executor {
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value leftValue = left.exec(ctx);
     Value rightValue = right.exec(ctx);
+
+    leftValue = ValueLambda.flat(leftValue, ctx);
+    rightValue = ValueLambda.flat(rightValue, ctx);
 
     if (leftValue.isNull() || rightValue.isNull()) {
       return ValueNull.INSTANCE;

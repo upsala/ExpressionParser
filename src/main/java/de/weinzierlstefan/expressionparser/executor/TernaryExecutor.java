@@ -5,6 +5,7 @@ import de.weinzierlstefan.expressionparser.ExecutorContext;
 import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 
 public class TernaryExecutor implements Executor {
   private final Executor condition;
@@ -20,6 +21,8 @@ public class TernaryExecutor implements Executor {
   @Override
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value conditionValue = condition.exec(ctx);
+
+    conditionValue = ValueLambda.flat(conditionValue, ctx);
 
     if (conditionValue.getBoolean()) {
       if (exec1 == null) { //Emulates elvis-operator

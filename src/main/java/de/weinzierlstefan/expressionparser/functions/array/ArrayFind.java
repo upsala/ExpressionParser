@@ -5,10 +5,10 @@ import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.Function;
 import de.weinzierlstefan.expressionparser.value.*;
 
-public class ArrayIndexOf implements Function {
+public class ArrayFind implements Function {
   @Override
   public String getName() {
-    return "arrayindexof";
+    return "arrayfind";
   }
 
   @Override
@@ -20,23 +20,24 @@ public class ArrayIndexOf implements Function {
 
     Value search = valueList.get(1);
 
-    if (search.isLambda()) {
-      ValueLambda lambda = (ValueLambda)search;
-
-      for (int i = 0; i < list.size(); i++) {
-        ValueList parameter = new ValueList();
-        parameter.add(list.get(i));
-        parameter.add(ValueInt.of(i));
-        parameter.add(ValueArray.of(list));
-
-        if (lambda.exec(parameter, executorContext).getBoolean()) {
-          return ValueInt.of(i);
-        }
-      }
-      return ValueInt.of(-1);
+    if (!search.isLambda()) {
+      throw new ExpressionException("Second parameter must be a lambda");
     }
 
-    return ValueInt.of(list.indexOf(search));
+    ValueLambda lambda = (ValueLambda)search;
+
+    for (int i = 0; i < list.size(); i++) {
+      ValueList parameter = new ValueList();
+      parameter.add(list.get(i));
+      parameter.add(ValueInt.of(i));
+      parameter.add(ValueArray.of(list));
+
+      if (lambda.exec(parameter, executorContext).getBoolean()) {
+        return list.get(i);
+      }
+    }
+
+    return ValueNull.INSTANCE;
   }
 
   @Override

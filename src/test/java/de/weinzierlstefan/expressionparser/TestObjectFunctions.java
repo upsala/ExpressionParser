@@ -53,4 +53,29 @@ public class TestObjectFunctions {
     assertEquals("[]", parse("objectvalues(object())").getString());
     assertEquals("[2,4]", parse("objectvalues(object(1,2,3,4))").getString());
   }
+
+  @Test
+  public void testObjectFilter() throws ExpressionException {
+    assertEquals("[4,5]", parse("arrayfilter([1,2,3,4,5], (v)->v>3)").getString());
+    assertEquals("[3,4,5]", parse("arrayfilter([1,2,3,4,5], (v,i)->i>1)").getString());
+  }
+
+  @Test
+  public void testObjectFind() throws ExpressionException {
+    assertEquals("4", parse("arrayfind([1,2,3,4,5], (v)->v>3)").getString());
+    assertEquals("2", parse("arrayfind([1,2,3,4,5], (v,i)->i==1)").getString());
+  }
+
+  @Test
+  public void testObjectMap() throws ExpressionException {
+    assertEquals("[2,4,6,8,10]", parse("arraymap([1,2,3,4,5], (v)->v*2)").getString());
+    assertEquals("[0,2,6,12,20]", parse("arraymap([1,2,3,4,5], (v,i)->v*i)").getString());
+  }
+
+  @Test
+  public void testObjectReduce() throws ExpressionException {
+    assertEquals("6", parse("arrayreduce([1,2,3],(a,v)->a+v,0)").getString());
+    assertEquals("9", parse("arrayreduce([1,2,3],(a,v,i)->a+v+i,0)").getString());
+  }
+
 }

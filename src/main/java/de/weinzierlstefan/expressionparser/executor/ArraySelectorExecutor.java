@@ -78,6 +78,8 @@ public class ArraySelectorExecutor implements Executor {
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value parentValue = parent.exec(ctx);
 
+    parentValue = ValueLambda.flat(parentValue, ctx);
+
     if (parentValue.isNull()) {
       return ValueNull.INSTANCE;
     }
@@ -87,10 +89,14 @@ public class ArraySelectorExecutor implements Executor {
       .map((entry) -> {
         if (entry instanceof ArraySelectorEntryExecutor arraySelectorEntryExecutor) {
           var from = arraySelectorEntryExecutor.from().exec(ctx);
-          return new Range(
-            from,
-            arraySelectorEntryExecutor.to() == null ? from : arraySelectorEntryExecutor.to().exec(ctx)
-          );
+          from = ValueLambda.flat(from, ctx);
+          var to = from;
+          if (arraySelectorEntryExecutor.to() != null) {
+            to = arraySelectorEntryExecutor.to().exec(ctx);
+            to = ValueLambda.flat(to, ctx);
+          }
+
+          return new Range(from, to);
         } else {
           throw new ExpressionException("Internal error");
         }

@@ -17,6 +17,8 @@ public class NegateExecutor implements Executor {
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     Value rightValue = right.exec(ctx);
 
+    rightValue = ValueLambda.flat(rightValue, ctx);
+
     if (rightValue.isNull()) {
       return ValueNull.INSTANCE;
     }

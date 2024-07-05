@@ -1,9 +1,11 @@
 package de.weinzierlstefan.expressionparser;
 
 import de.weinzierlstefan.expressionparser.executor.*;
+import de.weinzierlstefan.expressionparser.executor.ValueExecutor;
 import de.weinzierlstefan.expressionparser.parser.ParserBaseVisitor;
 import de.weinzierlstefan.expressionparser.parser.ParserParser;
 import de.weinzierlstefan.expressionparser.value.*;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -349,5 +351,22 @@ class ParserVisitor extends ParserBaseVisitor<Executor> {
   public Executor visitQuotedVariable(ParserParser.QuotedVariableContext ctx) {
     String txt = ctx.getText();
     return new VariableExexcutor(txt.substring(1, txt.length() - 1));
+  }
+
+  @Override
+  public Executor visitLambda(ParserParser.LambdaContext ctx) {
+    ParserParser.LambdaParameterContext list = ctx.lambdaParameter();
+    List<String> variables = List.of();
+    if (list!=null) {
+      variables = list
+        .children
+        .stream()
+        .map(ParseTree::getText)
+        .filter((e) -> !",".equals(e)) //TODO: is this the right way?
+        .toList();
+    }
+
+    ValueLambda value = new ValueLambda(visit(ctx.expr), variables);
+    return new ValueExecutor(value);
   }
 }

@@ -11,9 +11,12 @@ public class ObjectFunctions {
     Collection<Function> functionCollection = new ArrayList<>();
 
     functionCollection.add(new ObjectCreator());
+    functionCollection.add(new ObjectFilter());
     functionCollection.add(new ObjectFlip());
     functionCollection.add(new ObjectKeys());
+    functionCollection.add(new ObjectMap());
     functionCollection.add(new ObjectMerge());
+    functionCollection.add(new ObjectReduce());
     functionCollection.add(new ObjectRemoveKeys());
     functionCollection.add(new ObjectSet());
     functionCollection.add(new ObjectValues());

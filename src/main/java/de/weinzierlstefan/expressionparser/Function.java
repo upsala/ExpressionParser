@@ -41,4 +41,10 @@ public interface Function {
   default boolean returnsNullOnNull() {
     return true;
   }
+
+  /**
+   *
+   * @return
+   */
+  default boolean canHandleLambda() { return false; }
 }

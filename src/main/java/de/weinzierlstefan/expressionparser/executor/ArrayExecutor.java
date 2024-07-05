@@ -6,6 +6,7 @@ import de.weinzierlstefan.expressionparser.ExecutorStats;
 import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueArray;
+import de.weinzierlstefan.expressionparser.value.ValueLambda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,12 @@ public class ArrayExecutor implements Executor {
   public Value exec(ExecutorContext ctx) throws ExpressionException {
     List<Value> valueList = new ArrayList<>();
     for (Executor executor : executorList) {
-      valueList.add(executor.exec(ctx));
+      valueList.add(
+        ValueLambda.flat(
+          executor.exec(ctx),
+          ctx
+        )
+      );
     }
 
     return ValueArray.of(valueList);

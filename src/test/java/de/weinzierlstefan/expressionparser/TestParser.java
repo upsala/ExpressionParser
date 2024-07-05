@@ -336,4 +336,30 @@ public class TestParser {
     assertEquals("{'a':1}", parse("{'a':1}").toString());
     assertEquals("{1:{},2:[]}", parse("{1:{},2:[]}").toString());
   }
+
+  @Test
+  public void testLambda() throws ExpressionException {
+    assertEquals("1", parse("()->1").toString());
+    assertEquals("1", parse("(()->1)").toString());
+    assertEquals("3", parse("()->1+()->2").toString());
+    assertEquals("1", parse("()->3-()->2").toString());
+    assertEquals("6", parse("()->2*()->3").toString());
+    assertEquals("2", parse("()->6/()->3").toString());
+    assertEquals("1", parse("()->7%()->3").toString());
+    assertEquals("5", parse("max(()->5, ()->4)").toString());
+    assertEquals("true", parse("()->3>()->2").toString());
+    assertEquals("false", parse("()->3<()->2").toString());
+    assertEquals("false", parse("()->3==()->2").toString());
+    assertEquals("true", parse("()->3!=()->2").toString());
+    assertEquals("true", parse("()->3>=()->2").toString());
+    assertEquals("false", parse("()->3<=()->2").toString());
+    assertEquals("[3]", parse("(()->[1,2,3])[2]").toString());
+    assertEquals("[2]", parse("[1,2,3][()->1]").toString());
+    //assertEquals("[2,3]", parse("[1,2,3][()->1..()->2]").toString()); //TODO: Not possible to test currently, because of an other bug
+    assertEquals("1", parse("()->true?()->1:()->2").toString());
+    assertEquals("2", parse("()->false?()->1:()->2").toString());
+    assertEquals("[1,2]", parse("[()->1,()->2]").toString());
+    assertEquals("{1:2}", parse("{()->1:()->2}").toString());
+    assertEquals("3", parse("with(()->1 as a, a+()->2)").toString());
+  }
 }

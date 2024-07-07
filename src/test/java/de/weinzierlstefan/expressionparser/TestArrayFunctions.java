@@ -144,6 +144,7 @@ public class TestArrayFunctions {
   @Test
   public void testArrayUnion() throws ExpressionException {
     assertEquals("[1,2,3,4,5]", parse("arrayunion([1,2,3],[3,4,5])").getString());
+    assertEquals("[1,2,3,5,4]", parse("arrayunion([1,2,3,3],[5,4,3])").getString());
   }
 
   @Test

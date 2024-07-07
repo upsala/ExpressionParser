@@ -7,6 +7,9 @@ import de.weinzierlstefan.expressionparser.value.Value;
 import de.weinzierlstefan.expressionparser.value.ValueArray;
 import de.weinzierlstefan.expressionparser.value.ValueList;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  */
@@ -22,11 +25,13 @@ public class ArrayUnion implements Function {
       throw new ExpressionException("All parameteres must be arrays");
     }
 
+    Set<Value> valueSet = new HashSet<>();
     ValueList resultList = new ValueList();
     for (Value valueArray : valueList) {
       for (Value value : valueArray.getArray()) {
-        if (!resultList.contains(value)) {
+        if (!valueSet.contains(value)) {
           resultList.add(value);
+          valueSet.add(value);
         }
       }
     }

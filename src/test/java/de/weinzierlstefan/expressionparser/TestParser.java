@@ -310,7 +310,7 @@ public class TestParser {
 
   @Test
   public void testNestedFunction() throws ExpressionException {
-    assertEquals("1", parse("round(abs(sign(-100)))").toString());
+    assertEquals("1", parse("Round(abs(Sign(-100)))").toString());
   }
 
   @Test

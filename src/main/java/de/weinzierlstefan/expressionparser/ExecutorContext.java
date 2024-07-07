@@ -7,6 +7,7 @@ import de.weinzierlstefan.expressionparser.value.ValueContainer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -17,7 +18,7 @@ public class ExecutorContext {
   private final static AtomicReference<ExecutorContext> defaultExecutorContext = new AtomicReference<>(new ExecutorContext());
   private final ExecutorContext parentContext;
   private ValueContainer valueContainer = new DefaultValueContainer();
-  private Map<String, Function> functionMap = new HashMap<>();
+  private Map<String, Function> functionMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
   private Map<String, Object> optionMap = new HashMap<>();
 
   public ExecutorContext() {

@@ -15,7 +15,7 @@ public class FunctionExecutor implements Executor {
   private final List<Executor> executorList;
 
   public FunctionExecutor(String name, List<Executor> executorList) {
-    this.name = name.toLowerCase(Locale.ROOT);
+    this.name = name;
     this.executorList = executorList;
   }
 

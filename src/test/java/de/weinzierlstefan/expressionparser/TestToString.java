@@ -128,9 +128,9 @@ public class TestToString {
 
   @Test
   public void testFunction() {
-    assertEquals("sin(1)", parse("sin(1)").toString());
-    assertEquals("max(1,2,3)", parse("max(1,2,3)").toString());
-    assertEquals("max(1,min(2,3))", parse("max(1,min(2,3))").toString());
+    assertEquals("Sin(1)", parse("Sin(1)").toString());
+    assertEquals("Max(1,2,3)", parse("Max(1,2,3)").toString());
+    assertEquals("Max(1,Min(2,3))", parse("Max(1,Min(2,3))").toString());
   }
 
   @Test

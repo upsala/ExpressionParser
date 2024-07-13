@@ -13,7 +13,6 @@ public class CommonFunctions {
     functionCollection.add(new Between());
     functionCollection.add(new Bound());
     functionCollection.add(new Count());
-    functionCollection.add(new Coalesce());
     functionCollection.add(new IfNull());
     functionCollection.add(new IsArray());
     functionCollection.add(new IsNull());

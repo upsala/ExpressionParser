@@ -5,37 +5,39 @@ import de.weinzierlstefan.expressionparser.ExpressionException;
 import de.weinzierlstefan.expressionparser.Function;
 import de.weinzierlstefan.expressionparser.value.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class ObjectFilter implements Function {
+public class ObjectFind implements Function {
   @Override
   public String getName() {
-    return "objectfilter";
+    return "objectfind";
   }
 
   @Override
   public Value execute(ValueList valueList, ExecutorContext executorContext) throws ExpressionException {
-    Map<Value, Value> object = valueList.getMap(0);
-    if (!valueList.isLambda(1)) {
-      throw new ExpressionException("Lambda expected");
+    var map = valueList.getMap(0);
+    if (map == null) {
+      throw new ExpressionException("First parameter must be a object");
     }
 
-    ValueLambda lambda = (ValueLambda) valueList.get(1);
+    Value search = valueList.get(1);
 
-    Map<Value, Value> result = new HashMap<>();
-    for(Value key : object.keySet()) {
+    if (!search.isLambda()) {
+      throw new ExpressionException("Second parameter must be a lambda");
+    }
+
+    ValueLambda lambda = (ValueLambda)search;
+
+    for(var key : map.keySet()) {
       ValueList parameter = new ValueList();
-      parameter.add(object.get(key));
+      parameter.add(map.get(key));
       parameter.add(key);
-      parameter.add(ValueObject.of(object));
+      parameter.add(ValueObject.of(map));
 
       if (lambda.exec(parameter, executorContext).getBoolean()) {
-        result.put(key, object.get(key));
+        return map.get(key);
       }
     }
 
-    return ValueObject.of(result);
+    return ValueNull.INSTANCE;
   }
 
   @Override

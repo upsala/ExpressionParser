@@ -12,6 +12,7 @@ public class ObjectFunctions {
 
     functionCollection.add(new ObjectCreator());
     functionCollection.add(new ObjectFilter());
+    functionCollection.add(new ObjectFind());
     functionCollection.add(new ObjectFlip());
     functionCollection.add(new ObjectKeys());
     functionCollection.add(new ObjectMap());

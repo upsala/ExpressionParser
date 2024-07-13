@@ -56,26 +56,27 @@ public class TestObjectFunctions {
 
   @Test
   public void testObjectFilter() throws ExpressionException {
-    assertEquals("[4,5]", parse("arrayfilter([1,2,3,4,5], (v)->v>3)").getString());
-    assertEquals("[3,4,5]", parse("arrayfilter([1,2,3,4,5], (v,i)->i>1)").getString());
+    assertEquals("{5:6,3:4}", parse("objectfilter({1:2,3:4,5:6}, (v)->v>3)").getString());
+    assertEquals("{5:6,3:4}", parse("objectfilter({1:2,3:4,5:6}, (v,k)->k>1)").getString());
   }
 
   @Test
   public void testObjectFind() throws ExpressionException {
-    assertEquals("4", parse("arrayfind([1,2,3,4,5], (v)->v>3)").getString());
-    assertEquals("2", parse("arrayfind([1,2,3,4,5], (v,i)->i==1)").getString());
+    assertEquals("4", parse("objectfind({1:2,3:4,5:6}, (v)->v>3)").getString());
+    assertEquals("2", parse("objectfind({1:2,3:4,5:6}, (v,i)->i==1)").getString());
   }
 
   @Test
   public void testObjectMap() throws ExpressionException {
-    assertEquals("[2,4,6,8,10]", parse("arraymap([1,2,3,4,5], (v)->v*2)").getString());
-    assertEquals("[0,2,6,12,20]", parse("arraymap([1,2,3,4,5], (v,i)->v*i)").getString());
+    assertEquals("{1:4,3:8,5:12}", parse("objectmap({1:2,3:4,5:6}, (v)->v*2)").getString());
+    assertEquals("{1:2,3:12,5:30}", parse("objectmap({1:2,3:4,5:6}, (v,k)->v*k)").getString());
   }
 
   @Test
   public void testObjectReduce() throws ExpressionException {
-    assertEquals("6", parse("arrayreduce([1,2,3],(a,v)->a+v,0)").getString());
-    assertEquals("9", parse("arrayreduce([1,2,3],(a,v,i)->a+v+i,0)").getString());
+    assertEquals("12", parse("objectreduce({1:2,3:4,5:6},(a,v)->a+v,0)").getString());
+    assertEquals("21", parse("objectreduce({1:2,3:4,5:6},(a,v,k)->a+v+k,0)").getString());
+    assertEquals("121", parse("objectreduce({1:2,3:4,5:6},(a,v,k)->a+v+k,100)").getString());
   }
 
 }

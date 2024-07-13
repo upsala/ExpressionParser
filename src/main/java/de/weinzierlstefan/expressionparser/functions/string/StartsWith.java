@@ -18,11 +18,22 @@ public class StartsWith implements Function {
     String str1 = valueList.getString(0);
     String str2 = valueList.getString(1);
 
-    return ValueBoolean.of(str1.startsWith(str2));
+    int offset = 0;
+    if (valueList.size() > 2) {
+      if (!valueList.isNumber(2)) {
+        throw new ExpressionException("Offset must be a number");
+      }
+      offset = valueList.getInt(2);
+    }
+    if (offset < 0) {
+      return ValueBoolean.FALSE;
+    }
+
+    return ValueBoolean.of(str1.startsWith(str2, offset));
   }
 
   @Override
   public boolean parameterCount(int count) {
-    return count == 2;
+    return count == 2 || count == 3;
   }
 }

@@ -189,6 +189,7 @@ public class TestStringFunctions {
   public void testStartsWith() throws ExpressionException {
     assertEquals("true", parse("startswith('abc', 'a')").getString());
     assertEquals("false", parse("startswith('abc', 'b')").getString());
+    assertEquals("true", parse("startswith('abcdef', 'd', 3)").getString());
   }
 
   @Test

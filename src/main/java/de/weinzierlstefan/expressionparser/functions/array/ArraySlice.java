@@ -30,13 +30,22 @@ public class ArraySlice implements Function {
     int first = valueList.getInt(1);
     int second = valueList.getInt(2);
 
-    if (first < 0 || first >= list.size() || second < 0 || second >= list.size() || first > second) {
-      throw new ExpressionException("Positions are out of range");
-    }
+    first = Math.max(-1, Math.min(list.size(), first));
+    second = Math.max(-1, Math.min(list.size(), second));
 
     ValueList resultList = new ValueList();
-    for (int i = first; i <= second; ++i) {
-      resultList.add(list.get(i));
+    if (second<first) {
+      for (int i = first; i >= second; --i) {
+        if (i>=0 && i<list.size()) {
+          resultList.add(list.get(i));
+        }
+      }
+    } else {
+      for (int i = first; i <= second; ++i) {
+        if (i>=0 && i<list.size()) {
+          resultList.add(list.get(i));
+        }
+      }
     }
 
     return ValueArray.of(resultList);

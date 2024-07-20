@@ -127,6 +127,10 @@ public class TestArrayFunctions {
   @Test
   public void testArraySlice() throws ExpressionException {
     assertEquals("[4,5,6]", parse("arrayslice([1,2,3,4,5,6,7],3,5)").getString());
+    assertEquals("['B','C']", parse("ArraySlice(['A', 'B', 'C', 'D'], 1, 2)").getString());
+    assertEquals("['C','B']", parse("ArraySlice(['A', 'B', 'C', 'D'], 2, 1)").getString());
+    assertEquals("['A','B','C']", parse("ArraySlice(['A', 'B', 'C', 'D'], -1, 2)").getString());
+    assertEquals("[]", parse("ArraySlice(['A', 'B', 'C', 'D'], 10, 15)").getString());
   }
 
   @Test

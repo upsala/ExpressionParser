@@ -26,6 +26,9 @@ public class RPad implements Function {
     if (valueList.size() >= 3) {
       padding = valueList.getString(2);
     }
+    if (padding.isEmpty()) {
+      padding = " ";
+    }
 
     int rest = length - str.length();
     if (rest<=0) {

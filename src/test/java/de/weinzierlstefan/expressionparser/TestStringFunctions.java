@@ -107,6 +107,7 @@ public class TestStringFunctions {
     assertEquals("   abc", parse("lpad('abc', 6)").getString());
     assertEquals("...abc", parse("lpad('abc', 6, '.')").getString());
     assertEquals("abc", parse("lpad('abc', 2)").getString());
+    assertEquals(".*.abc", parse("lpad('abc', 6, '.*')").getString());
   }
 
   @Test
@@ -169,6 +170,7 @@ public class TestStringFunctions {
     assertEquals("abc   ", parse("rpad('abc', 6)").getString());
     assertEquals("abc...", parse("rpad('abc', 6, '.')").getString());
     assertEquals("abc", parse("rpad('abc', 2)").getString());
+    assertEquals("abc.*.", parse("rpad('abc', 6, '.*')").getString());
   }
 
   @Test

@@ -28,11 +28,17 @@ public class LPad implements Function {
     }
 
     int rest = length - str.length();
-    if (rest > 0) {
-      str = padding.repeat(rest / padding.length()).substring(0, rest) + str;
+    if (rest<=0) {
+      return ValueString.of(str);
     }
 
-    return ValueString.of(str);
+    final char[] fill = new char[rest];
+    final char[] padChars = padding.toCharArray();
+    for (int i = 0; i < rest; i++) {
+      fill[i] = padChars[i % padChars.length];
+    }
+
+    return ValueString.of(new String(fill)+str);
   }
 
   @Override

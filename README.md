@@ -59,12 +59,23 @@ public static void test3() {
 - More testing
 
 ### Author
-2021-2024 Weinzierl Stefan
+2021-2025 Weinzierl Stefan
 
 ### License
 Apache V2.0
 
 ### Changelog
+#### Version 1.2.1
+- Optimized performance of ArrayUnion-Function
+- Function names are no longer casesensitive 
+- Removed function coalesce(), it was the same as ifnull()
+- Fixed tests for object-functions
+- ArraySlice doesn't throw an error if the range doesn't fit
+- RPad & LPad failed, when longer padding-strings has been used
+
+#### Version 1.2.0
+- Added Lambda-Functions
+
 #### Version 1.1.0
 - Refactoring of the ExecutorContext. Now functions must not be know at parsing-time.
 
